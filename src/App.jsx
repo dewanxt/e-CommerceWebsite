@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getDatabase, ref, set, onValue, push, remove } from "firebase/database";
 import { charLength } from 'firebase/firestore/pipelines'
 import { IoTrashBin } from "react-icons/io5";
 import { TbEdit } from "react-icons/tb";
+import { BiSolidVolumeMute } from "react-icons/bi";
+import { BiSolidVolumeFull } from "react-icons/bi";
 import { ToastContainer, toast, Flip, Bounce } from 'react-toastify';
 import videoBg from './assets/murphys law.mp4';
 import audioBg from './assets/mountains.mp3';
-
-
-
 
 function App() {
 
@@ -53,6 +52,8 @@ function App() {
   const [allTask, setAllTask] = useState([])
   const [edit, setEdit] = useState(false)
   const [editId, setEditId] = useState(null)
+  const [audioEnabled, setAudioEnabled] = useState(false)
+  const audioRef = useRef(null)
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -119,12 +120,32 @@ function App() {
     setTask(value)
   }
 
+  const toggleAudio = async () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (audio.paused) {
+      try {
+        await audio.play()
+        setAudioEnabled(true)
+      } catch (error) {
+        console.error('Audio playback failed:', error)
+      }
+    } else {
+      audio.pause()
+      setAudioEnabled(false)
+    }
+  }
+
   return (
     <div className='min-h-screen relative overflow-hidden text-white'>
-      <audio src={audioBg}
+      <audio ref={audioRef}
+        src={audioBg}
         autoPlay
         loop
         playsInline
+        preload='auto'
+        volume={0.3}
         className='hidden' />
       <video
         className='absolute inset-0 w-full h-full object-cover opacity-40'
@@ -137,6 +158,14 @@ function App() {
       />
       <div className='absolute inset-0 bg-black/25' />
       <ToastContainer />
+      <button
+        type='button'
+        onClick={toggleAudio}
+        className='absolute top-4 right-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/30 text-xl text-white backdrop-blur-sm transition hover:bg-black/50'
+        aria-label={audioEnabled ? 'Mute audio' : 'Unmute audio'}
+      >
+        {audioEnabled ? <BiSolidVolumeFull /> : <BiSolidVolumeMute />}
+      </button>
       <div className=' relative z-10'>
         <h1 className='app-title text-4xl md:text-5xl py-6 mb-8 text-center font-semibold shadow-lg backdrop-blur-sm cursor-pointer'>
           Todo Application
