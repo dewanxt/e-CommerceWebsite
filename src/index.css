@@ -1,40 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Allan:wght@400;700&family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
 
 
+@utility container {
+    @apply mx-auto
+} 
 
-h1 {
-    font-family: "Alumni Sans", sans-serif;
-}
-
-.inp-field {
-    font-family: "Alumni Sans", sans-serif;
-    font-size: 48px;
-}
-
-@keyframes rainbowShift {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.app-title {
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
-    background: linear-gradient(90deg, #ff4d6d, #ff8fab, #7bdff2, #5b8cff, #9b5cff, #ff4d6d);
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: rainbowShift 4s ease infinite;
+@theme {
+    --breakpoint-*: initial;
+    --breakpoint-sm:570px;
+    --breakpoint-md:770px;
+    --breakpoint-lg:1020px;
+    --breakpoint-xl:1170px;
 }
