@@ -21,7 +21,7 @@ const Banner = () => {
         <div className='pb-38.5'>
             <Container>
                 <div className='flex'>
-                    <div className='w-[20%] px-33.75 border-r-1'>
+                    <div className='w-[20%] px-33.75 border-r'>
                         <ul className='text-xl pt-10 space-y-4 w-54.25'>
                             <li className='justify-between flex cursor-pointer'>
                                 Woman’s Fashion

@@ -25,7 +25,7 @@ const NavBar = () => {
                     <div className='flex items-center gap-6'>
                         <div className='relative pl-5 py-2.5 bg-[#F5F5F5]'>
                             <input type="text" className='pr-17.5 focus:outline-none focus:ring-0' placeholder='What are you looking for?' />
-                            <HiMiniMagnifyingGlass className=' absolute top-3 right-3 text-2xl top-2 ' />
+                            <HiMiniMagnifyingGlass className='absolute top-2 right-3 text-2xl' />
                         </div>
                         <div className='flex items-center gap-4'>
                             <IoHeartOutline className='text-3xl' />
