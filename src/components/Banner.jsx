@@ -16,12 +16,22 @@ const Banner = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+
+        appendDots: dots => (
+            <div className="">
+                <ul className=" absolute bottom-4 left-[50%] translate-[-50%]">{dots}</ul>
+            </div>
+        ),
+        customPaging: i => (
+            <div className="w-3.5 h-3.5 bg-[#828282] rounded-full"></div>
+        ),
     };
+
     return (
         <div className='pb-38.5'>
             <Container>
-                <div className='flex'>
-                    <div className='w-[20%] px-33.75 border-r'>
+                <div className='boxss flex'>
+                    <div className='w-[20%] border-r'>
                         <ul className='text-xl pt-10 space-y-4 w-54.25'>
                             <li className='justify-between flex cursor-pointer'>
                                 Woman’s Fashion
@@ -39,19 +49,27 @@ const Banner = () => {
                             <li><a href="/groceries">Groceries &</a></li>
                         </ul>
                     </div>
-                    <div className='w-[80%] flex-1'>
-                        <div className='overflow-hidden pt-10.25 pl-12.25'>
-                            <SliderComponent {...settings} className='w-full'>
-                                <div>
-                                    <img src={BannerImg} alt="/BannerImg" />
-                                </div>
-                                <div>
-                                    <img src={BannerImg} alt="/BannerImg" />
-                                </div>
-                                <div>
-                                    <img src={BannerImg} alt="/BannerImg" />
-                                </div>
-                            </SliderComponent>
+                    <div className='w-[80%]'>
+                        <div className='pt-10.25 pl-12.25'>
+                            <div className='relative w-350'>
+                                <SliderComponent {...settings} className='w-full'>
+                                    <div>
+                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                    </div>
+                                    <div>
+                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                    </div>
+                                    <div>
+                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                    </div>
+                                    <div>
+                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                    </div>
+                                    <div>
+                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                    </div>
+                                </SliderComponent>
+                            </div>
                         </div>
                     </div>
                 </div>

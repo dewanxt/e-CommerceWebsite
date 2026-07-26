@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className='bg-black text-white py-3'>
       <Container>
-        <div className='flex justify-between px-34'>
+        <div className='boxss flex justify-between'>
           <div></div>
           <p className='text-sm gap-2 flex'>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
             <span className='underline font-bold'>ShopNow</span>

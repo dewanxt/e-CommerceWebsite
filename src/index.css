@@ -14,4 +14,13 @@
     --breakpoint-xl: 1170px;
     --font-poppins: "Poppins", sans-serif;
     --font-inter: "Inter", sans-serif;
+    --color-primary: #DB4444;
+}
+
+.slick-dots .slick-active div {
+    @apply bg-primary border-2 border-white
+}
+
+.boxss {
+    @apply px-34
 }
