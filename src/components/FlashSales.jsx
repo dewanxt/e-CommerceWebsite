@@ -3,6 +3,9 @@ import Container from './Container'
 import SecHead from './SecHead'
 import { countDownDateAndTime } from 'countdown-date-time';
 import CountDown from './CountDown';
+import Cart from './Cart';
+import Controller from "../assets/Controller.png"
+import Slider from "react-slick";
 
 const FlashSales = () => {
 
@@ -23,14 +26,27 @@ const FlashSales = () => {
         <div className='boxss mt-35 mb-20'>
             <Container>
                 <div className='flex items-end gap-21.25'>
-                    <SecHead />
+                    <SecHead
+                        title="Today’s"
+                        heading="Flash Sales"
+                    />
                     <CountDown
-                        Days = {count.days}
-                        Hours = {count.hours}
-                        Minutes = {count.minutes}
-                        Seconds = {count.seconds}
+                        Days={count.days}
+                        Hours={count.hours}
+                        Minutes={count.minutes}
+                        Seconds={count.seconds}
                     />
                 </div>
+                    <div className='mt-10'>
+                        <Cart
+                        imgSrc = {Controller}
+                        title = "HAVIT HV-G92 Gamepad"
+                        percentage = "-40"
+                        price = "120"
+                        discountPrice = "160"
+                        review = "88"
+                        />
+                    </div>
             </Container>
         </div>
     )
