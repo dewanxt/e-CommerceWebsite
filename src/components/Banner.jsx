@@ -1,6 +1,10 @@
 import React from 'react'
 import Container from './Container'
-import BannerImg from '../assets/BannerImg.jpg'
+import SlideImg1 from '../assets/Iphone 13 Series.png'
+import SlideImg2 from '../assets/Iphone 14 Series.jpg'
+import SlideImg3 from '../assets/Iphone 15 Series.png'
+import SlideImg4 from '../assets/Iphone 16 Series.png'
+import SlideImg5 from '../assets/Iphone 17 Series.png'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -54,19 +58,19 @@ const Banner = () => {
                             <div className='relative w-350'>
                                 <SliderComponent {...settings} className='w-full'>
                                     <div>
-                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                        <img src={SlideImg2} alt="/SlideImg2" className='w-full' />
                                     </div>
                                     <div>
-                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                        <img src={SlideImg1} alt="/SlideImg1" className='w-full' />
                                     </div>
                                     <div>
-                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                        <img src={SlideImg3} alt="/SlideImg3" className='w-full' />
                                     </div>
                                     <div>
-                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                        <img src={SlideImg4} alt="/SlideImg4" className='w-full' />
                                     </div>
                                     <div>
-                                        <img src={BannerImg} alt="/BannerImg" className='w-full' />
+                                        <img src={SlideImg5} alt="/SlideImg5" className='w-full' />
                                     </div>
                                 </SliderComponent>
                             </div>
