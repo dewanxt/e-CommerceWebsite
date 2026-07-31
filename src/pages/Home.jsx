@@ -1,7 +1,8 @@
 import React from 'react'
-import FlashSales from '../Components/FlashSales'
-import Categories from '../Components/Categories'
-import Banner from '../Components/Banner'
+import Banner from '../components/Banner'
+import FlashSales from '../components/FlashSales'
+import Categories from '../components/Categories'
+
 
 const Home = () => {
   return (
