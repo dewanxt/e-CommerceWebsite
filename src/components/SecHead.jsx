@@ -1,14 +1,14 @@
 import React from 'react'
 
-const SecHead = () => {
+const SecHead = ({title, heading}) => {
     return (
         <div>
             <div className='mx-auto'>
                  <div className='flex items-center gap-9 '>
                 <div className='w-5 h-10 bg-primary rounded-sm'></div>
-                <h4 className='text-primary font-semibold'>Today’s</h4>
+                <h4 className='text-primary font-semibold'>{title}</h4>
             </div>
-                <h2 className='text-[36px] font-semibold'>Flash Sales</h2>
+                <h2 className='text-[36px] font-semibold'>{heading}</h2>
             </div>
         </div>
     )

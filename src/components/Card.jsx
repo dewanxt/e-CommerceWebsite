@@ -4,10 +4,10 @@ import { IoHeartOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 
 
-const Cart = ({imgSrc, percentage, title, price, discountPrice, review}) => {
+const Card = ({imgSrc, percentage, title, price, discountPrice, review}) => {
     return (
         <>
-            <div className='w-67.5 group'>
+            <div className='group w-[270px]'>
                 <div className='relative overflow-hidden'>
                     <span className='absolute left-3 top-3 px-3 py-2 bg-primary rounded-sm text-white text-xs'>{percentage}%</span>
                     <img src={imgSrc} alt="" />
@@ -21,7 +21,7 @@ const Cart = ({imgSrc, percentage, title, price, discountPrice, review}) => {
 
                     </div>
 
-                    <button className='absolute -bottom-11 bg-black text-white font-medium w-full py-2.25 group-hover:bottom-0  duration-150 ease-linear cursor-pointer'>Add to Cart</button>
+                    <button className='absolute -bottom-11 bg-black w-full text-white font-medium py-2.25 group-hover:bottom-0  duration-150 ease-linear cursor-pointer'>Add to Cart</button>
 
                 </div>
                 <h3 className='mt-4 mb-2 font-medium'>{title}</h3>
@@ -38,4 +38,4 @@ const Cart = ({imgSrc, percentage, title, price, discountPrice, review}) => {
     )
 }
 
-export default Cart
+export default Card

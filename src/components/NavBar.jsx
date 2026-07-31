@@ -12,7 +12,7 @@ const NavBar = () => {
     return (
         <>
             <Container>
-                <div className=' boxss flex items-center justify-between py-7 border-b-3'>
+                <div className='boxss flex items-center justify-between py-7 border-b-3'>
                     <div>
                         <img src={Logo} alt="/Logo" />
                     </div>

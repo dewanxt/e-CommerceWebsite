@@ -1,13 +1,14 @@
 import React from 'react'
-import Banner from '../components/Banner'
-import FlashSales from '../components/FlashSales'
-import CountDown from '../components/CountDown'
+import FlashSales from '../Components/FlashSales'
+import Categories from '../Components/Categories'
+import Banner from '../Components/Banner'
 
 const Home = () => {
   return (
     <div>
-      <Banner />
+      <Banner/>
       <FlashSales/>
+      <Categories/>
     </div>
   )
 }
