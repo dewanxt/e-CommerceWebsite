@@ -56,6 +56,7 @@ const FlashSales = () => {
     }
 
     const SliderComponent = Slider?.default ?? Slider;
+
     const settings = {
         dots: false,
         infinite: true,
@@ -82,7 +83,7 @@ const FlashSales = () => {
                         Seconds={count.seconds}
                     />
                 </div>
-                <div className=' mt-10 pb-14.25 w-full border-b-1 '>
+                <div className=' mt-10 pb-14.25 w-full border-b border-gray-400 '>
                     <SliderComponent {...settings}>
                         <div>
                             <Card

@@ -35,7 +35,7 @@ const Banner = () => {
         <div className='pb-38.5'>
             <Container>
                 <div className='boxss flex'>
-                    <div className='w-[20%] border-r'>
+                    <div className='w-[20%] border-r-2 border-gray-400'>
                         <ul className='text-xl pt-10 space-y-4 w-54.25'>
                             <li className='justify-between flex cursor-pointer'>
                                 Woman’s Fashion
