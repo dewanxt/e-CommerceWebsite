@@ -4,11 +4,11 @@ import { IoHeartOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 
 
-const Card = ({ imgSrc, percentage, title, price, discountPrice, review }) => {
+const Card = ({ imgSrc, percentage, title, price, discountPrice, rating, review }) => {
     return (
         <>
             <div className='group w-[270px] mx-auto'>
-                <div className='relative overflow-hidden'>
+                <div className='relative overflow-hidden  bg-secondary'>
                     <span className='absolute left-3 top-3 px-3 py-2 bg-primary rounded-sm text-white text-xs'>{percentage}%</span>
                     <img src={imgSrc} alt="" />
                     <div className=' absolute top-3 right-3 space-y-2 '>
@@ -30,7 +30,7 @@ const Card = ({ imgSrc, percentage, title, price, discountPrice, review }) => {
                     <h4 className='text-[#0000008e] line-through font-medium'>${discountPrice}</h4>
                 </div>
                 <div className='flex gap-2'>
-                    <Rate allowHalf deafultvalue={5} />
+                    <Rate allowHalf value={rating} />
                     <h4 className='text-[#0000008e]'>({review})</h4>
                 </div>
             </div>
