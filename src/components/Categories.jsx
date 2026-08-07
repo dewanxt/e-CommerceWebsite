@@ -12,7 +12,7 @@ import { countDownDateAndTime } from 'countdown-date-time';
 
 const Categories = () => {
 
-    const conduct_date = '2026-08-6 12:00:00';
+    const conduct_date = '2026-08-30 12:00:00';
 
     const [count, setcount] = useState({})
 
@@ -320,32 +320,38 @@ const Categories = () => {
                         </SliderComponent>
                     </div>
                     <div>
-                        <div className='relative overflow-hidden mt-35'>
-                            <img src={SpecialOffer} alt="" className='w-full bg-cover bg-no-repeat mx-auto' />
-                            <div className='absolute inset-0 ml-24 my-34 space-y-8 w-110.75 text-white mx-auto '>
-                                <p className='text-[#00FF66] text-[16px] '>Categories</p>
-                                <h1 className='text-5xl font-semibold leading-17'>Enhance Your Music Experience</h1>
+                        <div>
 
-                                <div className='flex gap-9.5 items-center text-black'>
-                                    <div className='countRound'>
-                                        <h2 className='text-xl font-semibold text-center'>{count.days}</h2>
-                                        <h3 className='text-xs font-medium text-center'>Days</h3>
-                                    </div>
-                                    <div className='countRound'>
-                                        <h2 className='text-xl font-semibold text-center'>{count.hours}</h2>
-                                        <h3 className='text-xs font-medium text-center'>Hours</h3>
-                                    </div>
-                                    <div className='countRound'>
-                                        <h2 className='text-xl font-semibold text-center'>{count.minutes}</h2>
-                                        <h3 className='text-xs font-medium text-center'>Minutes</h3>
-                                    </div>
-                                    <div className='countRound'>
-                                        <h2 className='text-xl font-semibold text-center'>{count.seconds}</h2>
-                                        <h3 className='text-xs font-medium text-center'>Seconds</h3>
-                                    </div>
+                            <div className='relative overflow-hidden mt-35'>
+                                <div className='relative'>
+                                    <img src={SpecialOffer} alt="" className=' relative w-full bg-cover bg-no-repeat mx-auto' />
                                 </div>
+                                <div className='absolute inset-0 ml-30 my-34 space-y-8 w-110.75 text-white mx-auto '>
+                                    <p className='text-[#00FF66] text-[16px] '>Categories</p>
+                                    <h1 className='text-5xl font-semibold leading-17'>Enhance Your Music Experience</h1>
 
-                                <button className='bg-[#00FF66] py-4 px-8 mt-8 rounded-sm cursor-pointer'>Buy Now</button>
+
+                                    <div className='flex gap-9.5 items-center text-black'>
+                                        <div className='countRound'>
+                                            <h2 className='text-xl font-semibold text-center'>{count.days}</h2>
+                                            <h3 className='text-xs font-medium text-center'>Days</h3>
+                                        </div>
+                                        <div className='countRound'>
+                                            <h2 className='text-xl font-semibold text-center'>{count.hours}</h2>
+                                            <h3 className='text-xs font-medium text-center'>Hours</h3>
+                                        </div>
+                                        <div className='countRound'>
+                                            <h2 className='text-xl font-semibold text-center'>{count.minutes}</h2>
+                                            <h3 className='text-xs font-medium text-center'>Minutes</h3>
+                                        </div>
+                                        <div className='countRound'>
+                                            <h2 className='text-xl font-semibold text-center'>{count.seconds}</h2>
+                                            <h3 className='text-xs font-medium text-center'>Seconds</h3>
+                                        </div>
+                                    </div>
+
+                                    <button className='bg-[#00FF66] py-4 px-8 mt-8 rounded-sm cursor-pointer'>Buy Now</button>
+                                </div>
                             </div>
                         </div>
                     </div>

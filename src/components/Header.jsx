@@ -1,5 +1,6 @@
 import React from 'react'
 import Container from './Container'
+import { NavLink } from 'react-router'
 
 const Header = () => {
   return (
@@ -8,7 +9,7 @@ const Header = () => {
         <div className='boxss flex justify-between'>
           <div></div>
           <p className='text-sm gap-2 flex'>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-            <span className='underline font-bold'>ShopNow</span>
+            <NavLink to="/shop"><span className='underline font-bold'>ShopNow</span></NavLink>
           </p>
           <select name="" id="" className='bg-black text-white text-sm'>
             <option value="">English</option>

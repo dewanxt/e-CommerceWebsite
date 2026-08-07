@@ -56,7 +56,7 @@ const Banner = () => {
                     <div className='w-[80%]'>
                         <div className='pt-10.25 pl-12.25'>
                             <div className='relative w-350'>
-                                <SliderComponent {...settings} className='w-full'>
+                                <SliderComponent {...settings} className='w-[892px]'>
                                     <div>
                                         <img src={SlideImg2} alt="/SlideImg2" className='w-full' />
                                     </div>

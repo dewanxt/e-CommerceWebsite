@@ -3,19 +3,26 @@ import Container from '../components/Container'
 import Card from '../components/Card'
 import BreadCrump from '../components/BreadCrump'
 import Paginate from '../components/Paginate'
+import Skeleton from '../components/Skeleton'
 
 const Shop = () => {
 
   const [products, setProducts] = useState([])
   const [value, setValue] = useState(6)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
 
     fetch('https://dummyjson.com/products')
       .then(res => res.json())
-      .then((data) => setProducts(data.products));
+      .then((data) => setProducts(data.products))
+      .then (()=> setLoading(false))
 
   }, [])
+
+    const uniqueCategories = [...new Set(products.map((item)=> item.category))]
+
+  
 
   return (
     <>
@@ -23,15 +30,15 @@ const Shop = () => {
         <Container>
           <div>
             <div>
-              
-              <BreadCrump/>
+
+              <BreadCrump />
 
               <div className='flex justify-between items-center'>
                 <h2 className='font-bold text-xl mt-12.5'>Shop by Category</h2>
                 <div className='flex gap-4 items-center'>
                   <h3>Show : </h3>
                   <div>
-                    <select onChange={(e)=> setValue(e.target.value)} name="" id="" className='border border-[#D9D9D9] rounded-[5px] px-10 py-1'>
+                    <select onChange={(e) => setValue(e.target.value)} name="" id="" className='border border-[#D9D9D9] rounded-[5px] px-10 py-1'>
                       <option value="6">6</option>
                       <option value="9">9</option>
                       <option value="12">12</option>
@@ -44,18 +51,26 @@ const Shop = () => {
             <div className='flex justify-between'>
               <div className=' w-[20%] '>
                 <ul className='text-xl pt-10 space-y-4 w-54.25'>
-                  <li className='justify-between flex cursor-pointer'>
+                  {
+                    uniqueCategories.map((item)=>{
+                     return <li className='capitalize cursor-pointer'>{item}</li>
+                    })
+                    // uniqueCategories.map((category)=>{
+                    //   return <li key={category}>{category}</li>
+                    // })
+                  }
+                  {/* <li className='justify-between flex cursor-pointer'>
                     Woman’s Fashion
                   </li>
-                  <li className='justify-between flex cursor-pointer'>
+                  <li className=' flex justify-between cursor-pointer'>
                     Men’s Fashion
                   </li>
-                  <li><a href="/electronics">Electronics</a></li>
-                  <li><a href="/home_&_lifestyle">Home & Lifestyle</a></li>
-                  <li><a href="/medicine">Medicine</a></li>
-                  <li><a href="/sports_&_outdoor">Sports & Outdoor</a></li>
-                  <li><a href="/health_&_beauty">Health & Beauty</a></li>
-                  <li><a href="/groceries">Groceries &</a></li>
+                  <li>Electronics</li>
+                  <li>Home & Lifestyle</li>
+                  <li>Medicine</li>
+                  <li>Sports & Outdoor</li>
+                  <li>Health & Beauty</li>
+                  <li>Groceries &</li> */}
                 </ul>
               </div>
 
@@ -74,7 +89,21 @@ const Shop = () => {
                       />
                     })
                   } */}
-                <Paginate itemsPerPage={value} products={products} />
+
+                  {
+                    loading ? 
+                    <>
+                      <Skeleton />
+                      <Skeleton />
+                      <Skeleton />
+                      <Skeleton />
+                      <Skeleton />
+                      <Skeleton />
+                      
+                    </>
+                      :
+                      <Paginate itemsPerPage={value} products={products} />
+                  }
                 </div>
               </div>
             </div>
