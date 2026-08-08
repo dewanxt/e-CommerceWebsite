@@ -106,16 +106,16 @@ const ProductDetails = () => {
                                     </div>
 
 
-                                    <div className="mt-5 pt-4 border border-gray-100">
-                                        <div className="mb-2 text-sm">
-                                            <span className="block text-gray-800 text-2xl">Free Delivery</span>
-                                            <span className="text-gray-600 text-right text-lg">
-                                                Enter your postal code htmlFor Delivery Availability
+                                    <div className="mt-10 w-100 border border-gray-400 rounded">
+                                        <div className="pt-6 pb-4 pl-4  border-b border-gray-400">
+                                            <span className=" font-semibold block text-gray-800 text-xl">Free Delivery</span>
+                                            <span className="text-right text-base underline">
+                                                Enter your postal code for Delivery Availability
                                             </span>
                                         </div>
-                                        <div className="border-t border-gray-100 text-sm">
-                                            <span className="font-bold block text-gray-800 text-2xl">Return Delivery</span>
-                                            <span className="text-gray-600 text-right text-lg">
+                                        <div className="pt-6 pb-4 pl-4">
+                                            <span className="font-semibold block text-xl">Return Delivery</span>
+                                            <span className="text-right text-base underline">
                                                 Free 30 Days Delivery Returns. Details
                                             </span>
                                         </div>
