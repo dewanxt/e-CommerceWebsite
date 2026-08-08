@@ -69,7 +69,7 @@ const FlashSales = () => {
 
     return (
         <>
-        <div className='boxss mt-35' >
+        <div className='boxss pt-19.25' >
             <Container>
                 <div className='flex items-end gap-21.25'>
                     <SecHead

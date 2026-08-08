@@ -11,9 +11,9 @@ import { NavLink } from 'react-router'
 
 const NavBar = () => {
     return (
-        <>
-            <Container>
-                <div className='boxss flex items-center justify-between py-7 border-b-3'>
+        <div className='border-b-2'>
+            <Container classname=''>
+                <div className=' boxss flex items-center justify-between py-7  '>
                     <div>
                         <img src={Logo} alt="/Logo" />
                     </div>
@@ -32,14 +32,14 @@ const NavBar = () => {
                             <input type="text" className='pr-17.5 focus:outline-none focus:ring-0' placeholder='What are you looking for?' />
                             <HiMiniMagnifyingGlass className='absolute top-2 right-3 text-2xl' />
                         </div>
-                        <div className='flex items-center gap-4'>
+                        <div className='flex items-center gap-4 '>
                             <IoHeartOutline className='text-3xl' />
                             <BsCart3 className='text-3xl' />
                         </div>
                     </div>
                 </div>
             </Container>
-        </>
+        </div>
     )
 }
 

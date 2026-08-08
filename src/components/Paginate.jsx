@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const ReactPaginate = PaginateModule?.default ?? PaginateModule;
 
-const Paginate = ({ itemsPerPage }) => {
+const Paginate = ({ itemsPerPage = 6 }) => {
 
     const data = useSelector(state => state.products.value)
     const items = data
@@ -13,20 +13,23 @@ const Paginate = ({ itemsPerPage }) => {
     function Items({ currentItems }) {
         return (
             <>
-                {currentItems &&
-                    currentItems.map((item) => (
-                        <div className='flex flex-wrap gap-y-10 gap-x-7.5'>
-                            <Card
-                                imgSrc={item.thumbnail}
-                                percentage={item.discountPercentage}
-                                title={item.title}
-                                price={item.price}
-                                discountPrice={item.price - (item.price * (item.discountPercentage / 100)).toFixed(3)}
-                                rating={item.rating}
-                                review={item.reviews?.length ?? 0}
-                            />
-                        </div>
-                    ))}
+                <div className='flex flex-wrap gap-y-10 gap-x-7.5'>
+                    {currentItems &&
+                        currentItems.map((item) => (
+                            <div>
+                                <Card
+                                    id={item.id}
+                                    imgSrc={item.thumbnail}
+                                    percentage={item.discountPercentage}
+                                    title={item.title}
+                                    price={item.price}
+                                    discountPrice={item.price - (item.price * (item.discountPercentage / 100)).toFixed(3)}
+                                    rating={item.rating}
+                                    review={item.reviews?.length ?? 0}
+                                />
+                            </div>
+                        ))}
+                </div>
             </>
         );
     }
@@ -62,8 +65,10 @@ const Paginate = ({ itemsPerPage }) => {
                 pageCount={pageCount}
                 previousLabel=""
                 renderOnZeroPageCount={null}
-                className = "flex gap-4"
-                pageClassName = "bg-black px-6 py-1 text-white text-sm"
+                className="flex gap-4 mt-4"
+                pageClassName="bg-black px-6 py-1 text-white text-sm rounded-sm cursor-pointer hover:bg-primary duration-150 ease-linear"
+                previousClassName='hidden'
+                nextClassName='hidden'
             />
         </>
     )

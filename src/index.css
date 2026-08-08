@@ -62,7 +62,7 @@
 
 
 .boxss {
-    @apply px-50
+    @apply w-[1170px] m-auto
 }
 
 .slick-dots .slick-active div {
@@ -93,4 +93,8 @@ svg {
 
 .countRound {
     @apply bg-white rounded-full w-20 h-20 p-3.75 text-center mx-auto
+}
+
+li {
+    @apply hover:text-primary duration-100 ease-linear
 }

@@ -32,7 +32,7 @@ const Banner = () => {
     };
 
     return (
-        <div className='pb-38.5'>
+        <div className='pb-19.25'>
             <Container>
                 <div className='boxss flex'>
                     <div className='w-[20%] border-r-2 border-gray-400'>
@@ -56,7 +56,7 @@ const Banner = () => {
                     <div className='w-[80%]'>
                         <div className='pt-10.25 pl-12.25'>
                             <div className='relative w-350'>
-                                <SliderComponent {...settings} className='w-[892px]'>
+                                <SliderComponent {...settings} className='w-80%'>
                                     <div>
                                         <img src={SlideImg2} alt="/SlideImg2" className='w-full' />
                                     </div>

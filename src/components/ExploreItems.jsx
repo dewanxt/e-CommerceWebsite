@@ -2,7 +2,7 @@ import React from 'react'
 import Container from './Container'
 import SecHead from './SecHead'
 import Slider from "react-slick";
-import Cart from './Cart';
+import Card from './Card';
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
 import CartImg5 from "../assets/CartImg5.png"
@@ -62,7 +62,7 @@ const ExploreItems = () => {
                 <div>
                     <SliderComponent {...settings} className='pt-15'>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg5}
                                     title="Breed Dry Dog Food"
                                     percentage=""
@@ -70,7 +70,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="35"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg5}
                                     title="Breed Dry Dog Food"
                                     percentage=""
@@ -80,7 +80,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg6}
                                     title="CANON EOS DSLR Camera"
                                     percentage=""
@@ -88,7 +88,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="95"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg6}
                                     title="CANON EOS DSLR Camera"
                                     percentage=""
@@ -98,7 +98,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg7}
                                     title="ASUS FHD Gaming Laptop"
                                     percentage=""
@@ -106,7 +106,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="325"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg7}
                                     title="ASUS FHD Gaming Laptop"
                                     percentage=""
@@ -116,7 +116,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg8}
                                     title="Curology Product Set "
                                     percentage=""
@@ -124,7 +124,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="145"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg8}
                                     title="Curology Product Set "
                                     percentage=""
@@ -134,7 +134,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg5}
                                     title="Breed Dry Dog Food"
                                     percentage=""
@@ -142,7 +142,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="35"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg5}
                                     title="Breed Dry Dog Food"
                                     percentage=""
@@ -152,7 +152,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg6}
                                     title="CANON EOS DSLR Camera"
                                     percentage=""
@@ -160,7 +160,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="95"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg6}
                                     title="CANON EOS DSLR Camera"
                                     percentage=""
@@ -170,7 +170,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg7}
                                     title="ASUS FHD Gaming Laptop"
                                     percentage=""
@@ -178,7 +178,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="325"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg7}
                                     title="ASUS FHD Gaming Laptop"
                                     percentage=""
@@ -188,7 +188,7 @@ const ExploreItems = () => {
                                 />
                             </div>
                             <div className='space-y-15'>
-                                <Cart
+                                <Card
                                     imgSrc={CartImg8}
                                     title="Curology Product Set "
                                     percentage=""
@@ -196,7 +196,7 @@ const ExploreItems = () => {
                                     discountPrice=""
                                     review="145"
                                 />
-                                <Cart
+                                <Card
                                     imgSrc={CartImg8}
                                     title="Curology Product Set "
                                     percentage=""

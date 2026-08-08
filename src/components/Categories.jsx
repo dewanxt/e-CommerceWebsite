@@ -65,7 +65,7 @@ const Categories = () => {
 
     return (
         <>
-            <div className=' mt-20 boxss'>
+            <div className=' pt-20 boxss'>
                 <Container>
                     <div className='flex items-end gap-21.25'>
                         <SecHead
