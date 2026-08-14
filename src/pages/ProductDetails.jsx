@@ -141,7 +141,12 @@ const ProductDetails = () => {
                         <SecHead
                             title="Related"
                         />
-                        <Card/>
+                        <div className='flex pt-17.5'>
+                            <Card />
+                            <Card />
+                            <Card />
+                            <Card />
+                        </div>
                     </div>
                 </Container>
             </div>
