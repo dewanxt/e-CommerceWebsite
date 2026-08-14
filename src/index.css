@@ -62,7 +62,7 @@
 
 
 .boxss {
-    @apply w-292.5 m-auto
+    @apply w-[1170px] m-auto
 }
 
 .slick-dots .slick-active div {
