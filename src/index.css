@@ -62,7 +62,7 @@
 
 
 .boxss {
-    @apply w-[1170px] m-auto
+    @apply w-292.5 m-auto
 }
 
 .slick-dots .slick-active div {
@@ -79,9 +79,13 @@
     stroke: white;
 }
 
-svg {
-    @apply mx-auto
-}
+    svg {
+        @apply mx-auto
+    }
+
+ .deliv svg {
+    @apply mx-5
+ }
 
 .footerBox, ul {
     @apply space-y-6
@@ -95,6 +99,6 @@ svg {
     @apply bg-white rounded-full w-20 h-20 p-3.75 text-center mx-auto
 }
 
-li {
+/* li {
     @apply hover:text-primary duration-100 ease-linear
-}
+} */

@@ -19,6 +19,7 @@ const Paginate = ({ itemsPerPage = 6 }) => {
                             <div>
                                 <Card
                                     id={item.id}
+                                    productDetails = {item}
                                     imgSrc={item.thumbnail}
                                     percentage={item.discountPercentage}
                                     title={item.title}

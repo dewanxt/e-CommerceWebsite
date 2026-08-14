@@ -5,6 +5,10 @@ import { Rate } from 'antd'
 import { useParams } from 'react-router'
 import axios from 'axios'
 import { IoHeartOutline } from "react-icons/io5";
+import { GrPowerCycle } from "react-icons/gr";
+import { TbTruckDelivery } from "react-icons/tb";
+import SecHead from '../components/SecHead'
+import Card from '../components/Card'
 
 const ProductDetails = () => {
 
@@ -60,7 +64,7 @@ const ProductDetails = () => {
 
                                     <div className="flex items-center flex-wrap mb-4">
                                         <span className="text-xl mr-3 min-w-15">Colours:</span>
-                                    </div>  
+                                    </div>
 
 
                                     <div className="flex items-center flex-wrap mb-4">
@@ -101,23 +105,30 @@ const ProductDetails = () => {
                                             Buy Now
                                         </button>
                                         <div className='ml-5 p-2.5 text-xl font-bold border border-gray-300 rounded hover:bg-primary hover:text-white transition-colors'>
-                                            <IoHeartOutline/>
+                                            <IoHeartOutline />
                                         </div>
                                     </div>
 
 
                                     <div className="mt-10 w-100 border border-gray-400 rounded">
-                                        <div className="pt-6 pb-4 pl-4  border-b border-gray-400">
-                                            <span className=" font-semibold block text-gray-800 text-xl">Free Delivery</span>
-                                            <span className="text-right text-base underline">
-                                                Enter your postal code for Delivery Availability
-                                            </span>
+                                        <div className=" flex items-center pt-6 pb-4 pr- border-b border-gray-400">
+                                            <TbTruckDelivery className='text-3xl' />
+                                            <div>
+                                                <span className=" font-semibold block text-gray-800 text-lg">Free Delivery</span>
+                                                <span className=" text-base underline">
+                                                    Enter your postal code for Delivery Availability
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="pt-6 pb-4 pl-4">
-                                            <span className="font-semibold block text-xl">Return Delivery</span>
-                                            <span className="text-right text-base underline">
-                                                Free 30 Days Delivery Returns. Details
-                                            </span>
+                                        <div className=" deliv flex items-center pt-6 pb-4 pr-">
+                                            <GrPowerCycle className='text-3xl' />
+
+                                            <div>
+                                                <span className="font-semibold block text-gray-800 text-lg">Return Delivery</span>
+                                                <span className=" text-xs underline">
+                                                    Free 30 Days Delivery Returns. Details
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -125,6 +136,12 @@ const ProductDetails = () => {
                         </div>
 
 
+                    </div>
+                    <div className='pt-35'>
+                        <SecHead
+                            title="Related"
+                        />
+                        <Card/>
                     </div>
                 </Container>
             </div>

@@ -4,12 +4,18 @@ import Logo from '../assets/Logo.png'
 import { IoHeartOutline } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
+import { useSelector } from 'react-redux';
 
 
 
 
 const NavBar = () => {
+
+    let navigate = useNavigate()
+
+    const data = useSelector(state => state.products.Cart)
+
     return (
         <div className='border-b-2'>
             <Container classname=''>
@@ -34,7 +40,10 @@ const NavBar = () => {
                         </div>
                         <div className='flex items-center gap-4 '>
                             <IoHeartOutline className='text-3xl' />
+                            <div onClick={()=> navigate("/CartPage")} className='relative'>
                             <BsCart3 className='text-3xl' />
+                            <span className='text-white bg-primary size-4 rounded-full text-xs flex justify-center items-center absolute bottom-5 left-5'>{data.length}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

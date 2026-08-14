@@ -326,7 +326,7 @@ const Categories = () => {
                                 <div className='relative'>
                                     <img src={SpecialOffer} alt="" className=' relative w-full bg-cover bg-no-repeat mx-auto' />
                                 </div>
-                                <div className='absolute inset-0 ml-30 my-34 space-y-8 w-110.75 text-white mx-auto '>
+                                <div className='absolute inset-0 ml-10 my-10 space-y-8 w-110.75 text-white mx-auto '>
                                     <p className='text-[#00FF66] text-[16px] '>Categories</p>
                                     <h1 className='text-5xl font-semibold leading-17'>Enhance Your Music Experience</h1>
 
