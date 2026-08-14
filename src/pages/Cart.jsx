@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const Cart = () => {
 
-    const data = useSelector(state => state.products.value)
+    const data = useSelector(state => state.products.Cart)
 
   return (
     <div className='boxss mt-20 mb-35'>

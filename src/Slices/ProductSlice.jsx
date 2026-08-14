@@ -4,7 +4,7 @@ export const ProductSlice = createSlice({
   name: 'Products',
   initialState: {
     value: [],
-    Cart: []
+    Cart: localStorage.getItem("Cart") ? JSON.parse(localStorage.getItem("Cart")) : [] 
     
   },
   reducers: {
@@ -13,7 +13,7 @@ export const ProductSlice = createSlice({
     },
     CartReducer: (state, action) => {
       state.Cart = [...state.Cart, action.payload]
-      
+      localStorage.setItem("Cart", JSON.stringify(state.Cart))
     }
   }
 })

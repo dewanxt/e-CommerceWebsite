@@ -23,7 +23,7 @@ const CartItem = ({ imgSrc, title, price, subTotal}) => {
                     </div>
                 </div>
                 </div>
-                <h4 className='flex-end'>${subTotal  }</h4>
+                <h4 className='flex-end'>${subTotal}</h4>
             </div>
         </div>
     )
