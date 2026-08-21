@@ -18,15 +18,6 @@ const Shop = () => {
 
   const data = useSelector(state => state.products.value)
 
-  // useEffect(() => {
-  //   fetch('https://dummyjson.com/products')
-  //     .then(res => res.json())
-  //     .then((data) => dispatch(ProductReducer(data.products)))
-  //     .then((data) => setProducts(data.products))
-  //     .then (()=> setLoading(false))
-
-  // }, [])
-
   const getAllProducts = async () => {
     let data = await axios.get('https://dummyjson.com/products')
     dispatch(ProductReducer(data.data.products))

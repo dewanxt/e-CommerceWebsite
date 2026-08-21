@@ -1,13 +1,6 @@
 import React from 'react'
-import Container from '../components/Container'
-import BreadCrump from '../components/BreadCrump'
-import CartItem from '../components/CartItem'
-import { useSelector } from 'react-redux'
 
-const Cart = () => {
-
-    const data = useSelector(state => state.products.Cart)
-
+const WishList = () => {
   return (
     <div className='mt-20 mb-35'>
       <Container>
@@ -40,4 +33,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default WishList

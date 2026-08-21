@@ -12,13 +12,23 @@ export const ProductSlice = createSlice({
       state.value = action.payload
     },
     CartReducer: (state, action) => {
-      state.Cart = [...state.Cart, action.payload]
-      localStorage.setItem("Cart", JSON.stringify(state.Cart))
-    }
+
+      let exist = state.Cart.find((item) => item.id == action.payload.id)
+      if(!exist){
+        state.Cart = [...state.Cart, action.payload]
+        localStorage.setItem("Cart", JSON.stringify(state.Cart))
+      }
+    },
+    removeReducer: (state,action) => {
+
+      state.Cart = state.Cart.filter((item) => item.id !== action.payload)
+        localStorage.setItem("Cart", JSON.stringify(state.Cart))
+      
+    },
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { ProductReducer, CartReducer } = ProductSlice.actions
+export const { ProductReducer, CartReducer, removeReducer } = ProductSlice.actions
 
-export default ProductSlice.reducer
+export default ProductSlice.reducer 

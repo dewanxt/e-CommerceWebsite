@@ -18,7 +18,7 @@ const NavBar = () => {
 
     return (
         <div className='border-b-2'>
-            <Container classname=''>
+            <Container className=''>
                 <div className=' boxss flex items-center justify-between py-7  '>
                     <div>
                         <img src={Logo} alt="/Logo" />
@@ -40,9 +40,9 @@ const NavBar = () => {
                         </div>
                         <div className='flex items-center gap-4 '>
                             <IoHeartOutline className='text-3xl' />
-                            <div onClick={()=> navigate("/Cart")} className='relative'>
-                            <BsCart3 className='text-3xl' />
-                            <span className='text-white bg-primary size-4 rounded-full text-xs flex justify-center items-center absolute bottom-5 left-5'>{data.length}</span>
+                            <div onClick={() => navigate("/Cart")} className='relative'>
+                                <BsCart3 className='text-3xl' />
+                                <span className='text-white bg-primary size-4 rounded-full text-xs flex justify-center items-center absolute bottom-5 left-5'>{data.length}</span>
                             </div>
                         </div>
                     </div>
