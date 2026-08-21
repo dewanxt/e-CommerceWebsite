@@ -14,12 +14,13 @@ const NavBar = () => {
 
     let navigate = useNavigate()
 
-    const data = useSelector(state => state.products.Cart)
+    const cart = useSelector(state => state.products.Cart)
+    const wishList = useSelector(state => state.products.WishList)
 
     return (
         <div className='border-b-2'>
             <Container className=''>
-                <div className=' boxss flex items-center justify-between py-7  '>
+                <div className='flex items-center justify-between py-7  '>
                     <div>
                         <img src={Logo} alt="/Logo" />
                     </div>
@@ -39,10 +40,13 @@ const NavBar = () => {
                             <HiMiniMagnifyingGlass className='absolute top-2 right-3 text-2xl' />
                         </div>
                         <div className='flex items-center gap-4 '>
-                            <IoHeartOutline className='text-3xl' />
+                            <div onClick={() => navigate("/WishList")} className='relative'>
+                                <IoHeartOutline className='text-3xl' />
+                                <span className='text-white bg-primary size-4 rounded-full text-xs flex justify-center items-center absolute bottom-5 left-5'>{wishList.length}</span>
+                            </div>
                             <div onClick={() => navigate("/Cart")} className='relative'>
                                 <BsCart3 className='text-3xl' />
-                                <span className='text-white bg-primary size-4 rounded-full text-xs flex justify-center items-center absolute bottom-5 left-5'>{data.length}</span>
+                                <span className='text-white bg-primary size-4 rounded-full text-xs flex justify-center items-center absolute bottom-5 left-5'>{cart.length}</span>
                             </div>
                         </div>
                     </div>
