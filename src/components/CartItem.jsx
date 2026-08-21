@@ -28,7 +28,7 @@ const CartItem = ({ imgSrc, title, price, subTotal,id }) => {
         <div>
             <div className='flex items-center px-10 py-6 rounded-sm shadow-sm'>
                 <div className='flex items-center gap-5 w-[31.5%]'>
-                    <span onClick={handleRemoveCart} className='flex justify-center items-center bg-red-500 size-5 rounded-full text-white text-xs hover:bg-red-400 duration-200 cursor-pointer '>
+                    <span onClick={handleRemoveCart} className='flex justify-center items-center bg-red-500 size-7 rounded-full text-white text-xl hover:bg-red-400 duration-200 cursor-pointer '>
                         <RxCross2 />
                     </span>
                     <img className='size-13.5' src={imgSrc} alt="" />

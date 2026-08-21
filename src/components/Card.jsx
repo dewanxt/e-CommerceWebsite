@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast, Bounce } from 'react-toastify'
 
 
-const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, review, productDetails, showActions = true, showDelete = false }) => {
+const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, review, productDetails, showActions = true, showDelete = false, centerCard = true }) => {
 
     let navigate = useNavigate()
 
@@ -18,7 +18,6 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
 
     const notify = (isAlreadyAdded) => {
         if (!isAlreadyAdded) {
-
             toast.success('Item Added Successfully!', {
                 position: "top-right",
                 autoClose: 1500,
@@ -59,16 +58,38 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
             dispatch(CartReducer(productDetails)),
             notify(false)
         )
-
     }
+
+    const isInWishlist = wishList.some((item) => item.id === id);
+
     const handleAddWishList = () => {
-        let matchItem = wishList.some((item) => item.id === id)
-
-        matchItem ? notify(true) : (
-            dispatch(wishListReducer(productDetails)),
-            notify(false)
-        )
-
+        if (isInWishlist) {
+            dispatch(removeWishListReducer(id))
+            toast.error('Item Removed from Wishlist!', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            })
+        } else {
+            dispatch(wishListReducer(productDetails))
+            toast.success('Item Added to Wishlist!', {
+                position: "top-right",
+                autoClose: 1500,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            })
+        }
     }
 
     const handleRemoveWishList = () => {
@@ -86,33 +107,32 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
         })
     }
 
-
-
-
-
     return (
         <>
-            <div className='group w-[270px] mx-auto group'>
+            <div className={`group w-[270px] ${centerCard ? 'mx-auto' : ''}`}>
                 <div className='relative overflow-hidden  bg-secondary'>
                     <span className='absolute left-3 top-3 px-3 py-2 bg-primary rounded-sm text-white text-xs'>{percentage}%</span>
                     <img onClick={handleProductDetails} src={imgSrc} alt="" className='px-10 py-8.75' />
                     {showActions && <div className=' absolute top-3 right-3 space-y-2 '>
-                        <div className=' text-2xl w-8.5 h-8.5 flex items-center justify-center bg-white rounded-full hover:bg-primary hover:text-white duration-150 ease-linear'>
-                            <IoHeartOutline onClick={handleAddWishList} />
+                        <div
+                            onClick={handleAddWishList}
+                            className={`text-2xl w-8.5 h-8.5 flex items-center justify-center rounded-full duration-150 ease-linear cursor-pointer 
+                                ${isInWishlist
+                                    ? 'bg-primary text-white hover:bg-primary hover:text-white active:bg-primary'
+                                    : 'bg-white text-black hover:bg-gray-100 active:bg-gray-200'
+                                }`}
+                        >
+                            <IoHeartOutline />
                         </div>
                         <div className='text-2xl w-8.5 h-8.5 flex items-center justify-center  bg-white rounded-full hover:bg-primary hover:text-white duration-150 ease-linear'>
-                            <IoEyeOutline className='' />
+                            <IoEyeOutline/>
                         </div>
 
                     </div>}
                     {showDelete && (
                         <button
-                            type='button'
                             onClick={handleRemoveWishList}
-                            title='Remove from wishlist'
-                            aria-label='Remove from wishlist'
-                            className='absolute top-3 right-3 text-2xl w-8.5 h-8.5 flex items-center justify-center bg-white rounded-full hover:bg-primary hover:text-white duration-150 ease-linear cursor-pointer'
-                        >
+                            className='absolute top-3 right-3 text-2xl w-8.5 h-8.5 flex items-center justify-center bg-white rounded-full hover:bg-primary hover:text-white duration-150 ease-linear cursor-pointer'>
                             <IoTrashOutline />
                         </button>
                     )}

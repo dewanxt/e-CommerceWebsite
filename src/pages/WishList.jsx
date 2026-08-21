@@ -22,10 +22,10 @@ const WishList = () => {
             <Container>
                 <BreadCrump />
                 <div className='flex justify-between items-center'>
-                    <span></span>
+                    <span>Wishlist ({data.length})</span>
                     <button className='border border-gray-400 px-12 py-4 rounded-sm cursor-pointer'>Move All To Bag</button>
                 </div>
-                <div className='flex justify-center items-center flex-wrap pt-15'>
+                <div className='flex flex-wrap justify-start pt-15 gap-6'>
                     {
                         data.map((item) => {
 
@@ -42,6 +42,7 @@ const WishList = () => {
                                 review={item.reviews?.length ?? 0}
                                 showActions={false}
                                 showDelete
+                                centerCard={false}
                             />
 
                         })
@@ -54,8 +55,7 @@ const WishList = () => {
                             heading="Just For You" />
                         <button
                             onClick={() => setShowRecommend(Math.min(12, recommend.length))}
-                            className='border border-gray-400 px-12 py-4 rounded-sm cursor-pointer'
-                        >
+                            className='border border-gray-400 px-12 py-4 rounded-sm cursor-pointer'>
                             See All
                         </button>
                     </div>

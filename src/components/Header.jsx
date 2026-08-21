@@ -1,15 +1,18 @@
 import React from 'react'
 import Container from './Container'
-import { NavLink } from 'react-router'
+import { useNavigate } from 'react-router'
 
 const Header = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div className='bg-black text-white py-3'>
       <Container>
         <div className='boxss flex justify-between'>
           <div></div>
           <p className='text-sm gap-2 flex'>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-            <NavLink to="/shop"><span className='underline font-bold'>ShopNow</span></NavLink>
+          <span onClick={() => navigate("/shop")} className='underline font-bold'>ShopNow</span>
           </p>
           <select name="" id="" className='bg-black text-white text-sm'>
             <option value="">English</option>
