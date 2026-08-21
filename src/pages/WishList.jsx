@@ -53,7 +53,7 @@ const WishList = () => {
                             className='flex'
                             heading="Just For You" />
                         <button
-                            onClick={() => setShowRecommend(recommend.length)}
+                            onClick={() => setShowRecommend(Math.min(12, recommend.length))}
                             className='border border-gray-400 px-12 py-4 rounded-sm cursor-pointer'
                         >
                             See All
