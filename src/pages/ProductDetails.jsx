@@ -16,11 +16,22 @@ const ProductDetails = () => {
 
     let [product, setProduct] = useState([])
     let [images, setImages] = useState([])
+    let [relatedProducts, setRelatedProducts] = useState([])
 
     const getAllProducts = async () => {
-        let data = await axios.get(`https://dummyjson.com/products/${id}`)
-        setProduct(data.data)
-        setImages(data.data.images)
+        let [productResponse, productsResponse] = await Promise.all([
+            axios.get(`https://dummyjson.com/products/${id}`),
+            axios.get('https://dummyjson.com/products')
+        ])
+
+        const currentProduct = productResponse.data
+        setProduct(currentProduct)
+        setImages(currentProduct.images)
+        setRelatedProducts(
+            productsResponse.data.products.filter((item) => (
+                item.category === currentProduct.category && item.id !== currentProduct.id
+            ))
+        )
     }
 
     useEffect(() => {
@@ -141,11 +152,21 @@ const ProductDetails = () => {
                         <SecHead
                             title="Related"
                         />
-                        <div className='flex pt-17.5'>
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
+                        <div className='flex flex-wrap pt-17.5'>
+                            {relatedProducts.slice(0, 4).map((item) => (
+                                <Card
+                                    key={item.id}
+                                    id={item.id}
+                                    productDetails={item}
+                                    imgSrc={item.thumbnail}
+                                    percentage={item.discountPercentage}
+                                    title={item.title}
+                                    price={item.price}
+                                    discountPrice={item.price - (item.price * (item.discountPercentage / 100)).toFixed(3)}
+                                    rating={item.rating}
+                                    review={item.reviews?.length ?? 0}
+                                />
+                            ))}
                         </div>
                     </div>
                 </Container>

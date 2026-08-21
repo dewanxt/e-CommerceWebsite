@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 
 const ReactPaginate = PaginateModule?.default ?? PaginateModule;
 
-const Paginate = ({ itemsPerPage = 6 }) => {
+const Paginate = ({ itemsPerPage = 6, items: providedItems }) => {
 
-    const data = useSelector(state => state.products.value)
-    const items = data
+    const storedItems = useSelector(state => state.products.value)
+    const items = providedItems ?? storedItems
 
     function Items({ currentItems }) {
         return (

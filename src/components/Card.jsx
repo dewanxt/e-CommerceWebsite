@@ -19,7 +19,7 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
     const notify = (isAlreadyAdded) => {
         if (!isAlreadyAdded) {
 
-            toast.success('Added Successfully!', {
+            toast.success('Item Added Successfully!', {
                 position: "top-right",
                 autoClose: 1500,
                 hideProgressBar: false,
@@ -32,7 +32,7 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
             });
             return;
         }
-        toast.warn('Already Added!', {
+        toast.warn('Item Already Added!', {
             position: "top-right",
             autoClose: 1500,
             hideProgressBar: false,
@@ -73,6 +73,17 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
 
     const handleRemoveWishList = () => {
         dispatch(removeWishListReducer(id))
+        toast.error('Item Removed!', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            transition: Bounce,
+        })
     }
 
 
