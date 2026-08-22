@@ -27,10 +27,10 @@ const CartItem = ({ imgSrc, title, price, subTotal, id }) => {
     return (
         <div>
             <div className='group flex items-center px-10 py-6 rounded-sm shadow-sm hover:bg-gray-50 transition-colors duration-200'>
-                <div className='flex items-center gap-5 w-[31.5%]'>
+                <div className=' relative flex items-center gap-5 w-[31.5%]'>
                     <span 
                         onClick={handleRemoveCart} 
-                        className='opacity-0 group-hover:opacity-100 flex justify-center items-center bg-red-500 size-7 rounded-full text-white text-xl hover:bg-red-400 duration-200 cursor-pointer transition-opacity'
+                        className='absolute top-0 left-1 opacity-0 group-hover:opacity-100 flex justify-center items-center bg-red-500 size-5 rounded-full text-white text-md font-bold hover:bg-red-400 duration-200 cursor-pointer transition-opacity'
                     >
                         <RxCross2 />
                     </span>

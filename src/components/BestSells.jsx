@@ -24,20 +24,24 @@ const BestSells = () => {
                             title="This Month"
                             heading="Best Selling Products"
                         />
-                        <button className=' right-0 bottom-0 mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
+                        <button className='right-0 bottom-0 mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
                             View All
                         </button>
                     </div>
 
-                    <div className='flex pt-15'>
+                    <div className='flex flex-wrap gap-y-10 gap-x-7.5 pt-15'>
                         {products.map((product) => (
                             <Card
                                 key={product.id}
+                                id={product.id}
+                                productDetails={product}
                                 imgSrc={product.thumbnail}
+                                percentage={product.discountPercentage}
                                 title={product.title}
                                 price={product.price}
-                                discountPrice={product.discountPercentage ? `$${Math.round(product.price / (1 - product.discountPercentage / 100))}` : ""}
-                                review={product.rating}
+                                discountPrice={product.price - (product.price * (product.discountPercentage / 100)).toFixed(3)}
+                                rating={product.rating}
+                                review={product.reviews?.length ?? 0}
                             />
                         ))}
                     </div>

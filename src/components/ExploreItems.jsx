@@ -71,21 +71,27 @@ const ExploreItems = () => {
                         {products.map((product, index) => (
                             <div key={product.id} className='space-y-15'>
                                 <Card
+                                    id={product.id}
+                                    productDetails={product}
                                     imgSrc={product.thumbnail}
+                                    percentage={product.discountPercentage}
                                     title={product.title}
-                                    percentage=""
                                     price={product.price}
-                                    discountPrice=""
-                                    review={product.rating}
+                                    discountPrice={product.price - (product.price * (product.discountPercentage / 100)).toFixed(3)}
+                                    rating={product.rating}
+                                    review={product.reviews?.length ?? 0}
                                 />
                                 {products[index + 1] && (
                                     <Card
+                                        id={products[index + 1].id}
+                                        productDetails={products[index + 1]}
                                         imgSrc={products[index + 1].thumbnail}
+                                        percentage={products[index + 1].discountPercentage}
                                         title={products[index + 1].title}
-                                        percentage=""
                                         price={products[index + 1].price}
-                                        discountPrice=""
-                                        review={products[index + 1].rating}
+                                        discountPrice={products[index + 1].price - (products[index + 1].price * (products[index + 1].discountPercentage / 100)).toFixed(3)}
+                                        rating={products[index + 1].rating}
+                                        review={products[index + 1].reviews?.length ?? 0}
                                     />
                                 )}
                             </div>

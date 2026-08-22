@@ -39,7 +39,7 @@ const Shop = () => {
 
   return (
     <>
-      <div className='boxss py-20'>
+      <div className='py-20'>
         <Container>
           <div>
             <div>
@@ -67,7 +67,7 @@ const Shop = () => {
                   <li onClick={() => dispatch(ProductReducer(products))} className='cursor-pointer'>All Products</li>
                   {
                     uniqueCategories.map((item) => {
-                      return <li onClick={() => handleCategories(item)} className='capitalize cursor-pointer '>{item}</li>
+                      return <li onClick={() => handleCategories(item)} className='capitalize cursor-pointer'>{item}</li>
                     })
 
                   }
