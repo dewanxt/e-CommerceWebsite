@@ -6,8 +6,7 @@ import { useDispatch } from 'react-redux';
 import { removeReducer } from '../Slices/ProductSlice';
 import { toast, Bounce } from 'react-toastify';
 
-
-const CartItem = ({ imgSrc, title, price, subTotal,id }) => {
+const CartItem = ({ imgSrc, title, price, subTotal, id }) => {
     let dispatch = useDispatch()
 
     const handleRemoveCart = () => {
@@ -24,18 +23,22 @@ const CartItem = ({ imgSrc, title, price, subTotal,id }) => {
             transition: Bounce,
         })
     }
+
     return (
         <div>
-            <div className='flex items-center px-10 py-6 rounded-sm shadow-sm'>
+            <div className='group flex items-center px-10 py-6 rounded-sm shadow-sm hover:bg-gray-50 transition-colors duration-200'>
                 <div className='flex items-center gap-5 w-[31.5%]'>
-                    <span onClick={handleRemoveCart} className='flex justify-center items-center bg-red-500 size-7 rounded-full text-white text-xl hover:bg-red-400 duration-200 cursor-pointer '>
+                    <span 
+                        onClick={handleRemoveCart} 
+                        className='opacity-0 group-hover:opacity-100 flex justify-center items-center bg-red-500 size-7 rounded-full text-white text-xl hover:bg-red-400 duration-200 cursor-pointer transition-opacity'
+                    >
                         <RxCross2 />
                     </span>
                     <img className='size-13.5' src={imgSrc} alt="" />
                     <h4>{title}</h4>
                 </div>
-                <div className=' w-[30%]'>
-                    <h4>{price}</h4>
+                <div className='w-[30%]'>
+                    <h4>${price}</h4>
                 </div>
                 <div className='w-[33.5%]'>
                     <div className='flex justify-center items-center gap-1 border rounded-sm py-1.5 px-3 w-18'>

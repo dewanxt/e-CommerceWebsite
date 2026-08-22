@@ -116,7 +116,7 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
                     {showActions && <div className=' absolute top-3 right-3 space-y-2 '>
                         <div
                             onClick={handleAddWishList}
-                            className={`text-2xl w-8.5 h-8.5 flex items-center justify-center rounded-full duration-150 ease-linear cursor-pointer 
+                            className={`text-2xl w-8.5 h-8.5 flex items-center hover:bg-primary hover:text-white justify-center rounded-full duration-150 ease-linear cursor-pointer 
                                 ${isInWishlist
                                     ? 'bg-primary text-white hover:bg-primary hover:text-white active:bg-primary'
                                     : 'bg-white text-black hover:bg-gray-100 active:bg-gray-200'
@@ -125,7 +125,7 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
                             <IoHeartOutline />
                         </div>
                         <div className='text-2xl w-8.5 h-8.5 flex items-center justify-center  bg-white rounded-full hover:bg-primary hover:text-white duration-150 ease-linear'>
-                            <IoEyeOutline/>
+                            <IoEyeOutline />
                         </div>
 
                     </div>}

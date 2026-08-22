@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from './Container'
 import SecHead from './SecHead'
-import CartImg1 from "../assets/CartImg1.png"
-import CartImg2 from "../assets/CartImg2.png"
-import CartImg3 from "../assets/CartImg3.png"
-import CartImg4 from "../assets/CartImg4.png"
 import Card from './Card'
+import axios from 'axios'
 
 const BestSells = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            let data = await axios.get('https://dummyjson.com/products?limit=4');
+            setProducts(data.data.products)
+        }
+        fetchProducts()
+    }, [])
+
     return (
         <>
-            <div className='boxss'>
+            <div>
                 <Container>
                     <div className='flex justify-between pt-17.5'>
                         <SecHead
@@ -18,39 +25,21 @@ const BestSells = () => {
                             heading="Best Selling Products"
                         />
                         <button className=' right-0 bottom-0 mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
-                        View All
-                    </button>
+                            View All
+                        </button>
                     </div>
 
                     <div className='flex pt-15'>
-                        <Card
-                            imgSrc={CartImg1}
-                            title="The north coat"
-                            price="260"
-                            discountPrice="$360"
-                            review="65"
-                        />
-                        <Card
-                            imgSrc={CartImg2}
-                            title="Gucci duffle bag"
-                            price="960"
-                            discountPrice="$1160"
-                            review="65"
-                        />
-                        <Card
-                            imgSrc={CartImg3}
-                            title="RGB liquid CPU Cooler"
-                            price="160"
-                            discountPrice="$170"
-                            review="65"
-                        />
-                        <Card
-                            imgSrc={CartImg4}
-                            title="Small BookSelf"
-                            price="360"
-                            discountPrice=""
-                            review="65"
-                        />
+                        {products.map((product) => (
+                            <Card
+                                key={product.id}
+                                imgSrc={product.thumbnail}
+                                title={product.title}
+                                price={product.price}
+                                discountPrice={product.discountPercentage ? `$${Math.round(product.price / (1 - product.discountPercentage / 100))}` : ""}
+                                review={product.rating}
+                            />
+                        ))}
                     </div>
                 </Container>
             </div>

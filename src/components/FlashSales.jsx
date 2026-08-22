@@ -4,13 +4,10 @@ import SecHead from './SecHead'
 import { countDownDateAndTime } from 'countdown-date-time';
 import CountDown from './CountDown';
 import Card from './Card';
-import Controller from "../assets/Controller.png"
-import Keyboard from "../assets/Keyboard.png"
-import Monitor from "../assets/Monitor.png"
-import Chair from "../assets/Chair.png"
 import Slider from "react-slick";
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
+import axios from 'axios';
 
 
 
@@ -19,6 +16,7 @@ const FlashSales = () => {
     const conduct_date = '2026-08-30 12:00:00';
 
     const [count, setcount] = useState({})
+    const [products, setProducts] = useState([])
 
     useEffect(() => {
         setInterval(() => {
@@ -27,6 +25,14 @@ const FlashSales = () => {
             setcount(countDown)
 
         }, 1000)
+    }, [])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            let data = await axios.get('https://dummyjson.com/products');
+            setProducts(data.data.products)
+        }
+        fetchProducts()
     }, [])
 
     function SampleNextArrow(props) {
@@ -85,86 +91,18 @@ const FlashSales = () => {
                 </div>
                 <div className=' mt-10 pb-14.25 w-full border-b border-gray-400 '>
                     <SliderComponent {...settings}>
-                        <div>
-                            <Card
-                                imgSrc={Controller}
-                                title="HAVIT HV-G92 Gamepad"
-                                percentage="-40"
-                                price="120"
-                                discountPrice="160"
-                                review="88"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                imgSrc={Keyboard}
-                                title="AK-900 Wired Keyboard"
-                                percentage="-35"
-                                price="960"
-                                discountPrice="1160"
-                                review="75"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                imgSrc={Monitor}
-                                title="IPS LCD Gaming Monitor"
-                                percentage="-30"
-                                price="370"
-                                discountPrice="400"
-                                review="99"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                imgSrc={Chair}
-                                title="S-Series Comfort Chair "
-                                percentage="-25"
-                                price="375"
-                                discountPrice="160"
-                                review="99"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                imgSrc={Controller}
-                                title="HAVIT HV-G92 Gamepad"
-                                percentage="-40"
-                                price="120"
-                                discountPrice="160"
-                                review="88"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                 imgSrc={Keyboard}
-                                title="AK-900 Wired Keyboard"
-                                percentage="-35"
-                                price="960"
-                                discountPrice="1160"
-                                review="75"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                imgSrc={Monitor}
-                                title="IPS LCD Gaming Monitor"
-                                percentage="-30"
-                                price="370"
-                                discountPrice="400"
-                                review="99"
-                            />
-                        </div>
-                        <div>
-                            <Card
-                                imgSrc={Chair}
-                                title="S-Series Comfort Chair "
-                                percentage="-25"
-                                price="375"
-                                discountPrice="160"
-                                review="99"
-                            />
-                        </div>
+                        {products.map((product) => (
+                            <div key={product.id}>
+                                <Card
+                                    imgSrc={product.thumbnail}
+                                    title={product.title}
+                                    percentage={`-${product.discountPercentage}`}
+                                    price={product.price}
+                                    discountPrice={Math.round(product.price / (1 - product.discountPercentage / 100))}
+                                    review={product.rating}
+                                />
+                            </div>
+                        ))}
                     </SliderComponent>
 
                     <button className=' block mx-auto mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>

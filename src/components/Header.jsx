@@ -12,9 +12,9 @@ const Header = () => {
         <div className='boxss flex justify-between'>
           <div></div>
           <p className='text-sm gap-2 flex'>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-          <span onClick={() => navigate("/shop")} className='underline font-bold'>ShopNow</span>
+          <span onClick={() => navigate("/shop")} className='underline font-bold cursor-pointer'>ShopNow</span>
           </p>
-          <select name="" id="" className='bg-black text-white text-sm'>
+          <select name="" id="" className='bg-black text-white text-sm cursor-pointer'>
             <option value="">English</option>
             <option value="">Bangla</option>
             <option value="">Turkish</option>

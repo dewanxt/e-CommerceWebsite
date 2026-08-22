@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from './Container'
 import SecHead from './SecHead'
 import Slider from "react-slick";
 import Card from './Card';
 import { GoArrowRight } from "react-icons/go";
 import { GoArrowLeft } from "react-icons/go";
-import CartImg5 from "../assets/CartImg5.png"
-import CartImg6 from "../assets/CartImg6.png"
-import CartImg7 from "../assets/CartImg7.png"
-import CartImg8 from "../assets/CartImg8.png"
+import axios from 'axios';
 
 const ExploreItems = () => {
+
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            let data = await axios.get('https://dummyjson.com/products?limit=8');
+            setProducts(data.data.products)
+        }
+        fetchProducts()
+    }, [])
 
     function SampleNextArrow(props) {
         const { className, style, onClick } = props;
@@ -51,7 +58,7 @@ const ExploreItems = () => {
     };
 
     return (
-        <div className=' boxss pt-17.75'>
+        <div className='pt-17.75'>
             <Container>
                 <div>
                     <SecHead
@@ -61,151 +68,28 @@ const ExploreItems = () => {
                 </div>
                 <div>
                     <SliderComponent {...settings} className='pt-15'>
-                            <div className='space-y-15'>
+                        {products.map((product, index) => (
+                            <div key={product.id} className='space-y-15'>
                                 <Card
-                                    imgSrc={CartImg5}
-                                    title="Breed Dry Dog Food"
+                                    imgSrc={product.thumbnail}
+                                    title={product.title}
                                     percentage=""
-                                    price="100"
+                                    price={product.price}
                                     discountPrice=""
-                                    review="35"
+                                    review={product.rating}
                                 />
-                                <Card
-                                    imgSrc={CartImg5}
-                                    title="Breed Dry Dog Food"
-                                    percentage=""
-                                    price="100"
-                                    discountPrice=""
-                                    review="35"
-                                />
+                                {products[index + 1] && (
+                                    <Card
+                                        imgSrc={products[index + 1].thumbnail}
+                                        title={products[index + 1].title}
+                                        percentage=""
+                                        price={products[index + 1].price}
+                                        discountPrice=""
+                                        review={products[index + 1].rating}
+                                    />
+                                )}
                             </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg6}
-                                    title="CANON EOS DSLR Camera"
-                                    percentage=""
-                                    price="360"
-                                    discountPrice=""
-                                    review="95"
-                                />
-                                <Card
-                                    imgSrc={CartImg6}
-                                    title="CANON EOS DSLR Camera"
-                                    percentage=""
-                                    price="360"
-                                    discountPrice=""
-                                    review="95"
-                                />
-                            </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg7}
-                                    title="ASUS FHD Gaming Laptop"
-                                    percentage=""
-                                    price="700"
-                                    discountPrice=""
-                                    review="325"
-                                />
-                                <Card
-                                    imgSrc={CartImg7}
-                                    title="ASUS FHD Gaming Laptop"
-                                    percentage=""
-                                    price="700"
-                                    discountPrice=""
-                                    review="325"
-                                />
-                            </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg8}
-                                    title="Curology Product Set "
-                                    percentage=""
-                                    price="500"
-                                    discountPrice=""
-                                    review="145"
-                                />
-                                <Card
-                                    imgSrc={CartImg8}
-                                    title="Curology Product Set "
-                                    percentage=""
-                                    price="500"
-                                    discountPrice=""
-                                    review="145"
-                                />
-                            </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg5}
-                                    title="Breed Dry Dog Food"
-                                    percentage=""
-                                    price="100"
-                                    discountPrice=""
-                                    review="35"
-                                />
-                                <Card
-                                    imgSrc={CartImg5}
-                                    title="Breed Dry Dog Food"
-                                    percentage=""
-                                    price="100"
-                                    discountPrice=""
-                                    review="35"
-                                />
-                            </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg6}
-                                    title="CANON EOS DSLR Camera"
-                                    percentage=""
-                                    price="360"
-                                    discountPrice=""
-                                    review="95"
-                                />
-                                <Card
-                                    imgSrc={CartImg6}
-                                    title="CANON EOS DSLR Camera"
-                                    percentage=""
-                                    price="360"
-                                    discountPrice=""
-                                    review="95"
-                                />
-                            </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg7}
-                                    title="ASUS FHD Gaming Laptop"
-                                    percentage=""
-                                    price="700"
-                                    discountPrice=""
-                                    review="325"
-                                />
-                                <Card
-                                    imgSrc={CartImg7}
-                                    title="ASUS FHD Gaming Laptop"
-                                    percentage=""
-                                    price="700"
-                                    discountPrice=""
-                                    review="325"
-                                />
-                            </div>
-                            <div className='space-y-15'>
-                                <Card
-                                    imgSrc={CartImg8}
-                                    title="Curology Product Set "
-                                    percentage=""
-                                    price="500"
-                                    discountPrice=""
-                                    review="145"
-                                />
-                                <Card
-                                    imgSrc={CartImg8}
-                                    title="Curology Product Set "
-                                    percentage=""
-                                    price="500"
-                                    discountPrice=""
-                                    review="145"
-                                />
-                            </div> 
-
+                        ))}
                     </SliderComponent>
                     <button className=' block mx-auto mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
                         View All Products
