@@ -21,7 +21,7 @@ const BestSells = () => {
             <div>
                 <Container>
                     {/* Section header with view all button */}
-                    <div className='flex justify-between items-center sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 pt-10 sm:pt-14 lg:pt-17.5'>
+                    <div className='flex sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 pt-10 sm:pt-14 lg:pt-17.5'>
                         <SecHead
                             title="This Month"
                             heading="Best Selling Products"

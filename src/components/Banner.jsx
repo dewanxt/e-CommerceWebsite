@@ -8,11 +8,22 @@ import SlideImg5 from '../assets/Iphone 17 Series.png'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { IoIosArrowForward, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward, IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
 
 const SliderComponent = Slider?.default ?? Slider;
+
+const SliderArrow = ({ direction, onClick }) => (
+    <button
+        type="button"
+        onClick={onClick}
+        aria-label={`${direction} slide`}
+        className={`hidden sm:flex absolute top-1/2 -translate-y-1/2 z-10 items-center justify-center w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-white/90 text-black shadow-md hover:bg-primary hover:text-white transition-colors ${direction === 'previous' ? 'left-2 lg:left-4' : 'right-2 lg:right-4'}`}
+    >
+        {direction === 'previous' ? <IoIosArrowBack /> : <IoIosArrowForward />}
+    </button>
+)
 
 const Banner = () => {
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false)
@@ -25,10 +36,13 @@ const Banner = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+        arrows: true,
+        prevArrow: <SliderArrow direction="previous" />,
+        nextArrow: <SliderArrow direction="next" />,
         autoplay: true,
         autoplaySpeed: 3000,
         appendDots: dots => (
-            <div className="">
+            <div className="relative z-10">
                 <ul className="absolute bottom-6 sm:bottom-8 left-[50%] translate-x-[-50%] flex gap-1 sm:gap-2">{dots}</ul>
             </div>
         ),
@@ -101,7 +115,7 @@ const Banner = () => {
                                     <RxHamburgerMenu className='text-xl' />
                                 )}
                                 <span className='text-sm'>Categories</span>
-                                
+
                             </button>
 
                             {/* Expandable categories dropdown */}
