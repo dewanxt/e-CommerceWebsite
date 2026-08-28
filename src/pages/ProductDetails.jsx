@@ -42,7 +42,7 @@ const ProductDetails = () => {
 
     return (
         <>
-            <div className='boxss pt-20 pb-40'>
+            <div className='pt-20 pb-40'>
                 <Container>
                     <BreadCrump />
 

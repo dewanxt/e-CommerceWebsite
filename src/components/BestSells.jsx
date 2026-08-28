@@ -7,6 +7,7 @@ import axios from 'axios'
 const BestSells = () => {
     const [products, setProducts] = useState([])
 
+    // Fetch best selling products
     useEffect(() => {
         const fetchProducts = async () => {
             let data = await axios.get('https://dummyjson.com/products?limit=4');
@@ -19,17 +20,16 @@ const BestSells = () => {
         <>
             <div>
                 <Container>
-                    <div className='flex justify-between pt-17.5'>
+                    {/* Section header with view all button */}
+                    <div className='flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0 pt-10 sm:pt-14 lg:pt-17.5'>
                         <SecHead
                             title="This Month"
                             heading="Best Selling Products"
                         />
-                        <button className='right-0 bottom-0 mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
-                            View All
-                        </button>
                     </div>
 
-                    <div className='flex flex-wrap gap-y-10 gap-x-7.5 pt-15'>
+                    {/* Products grid */}
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-7.5 pt-8 sm:pt-12 lg:pt-15'>
                         {products.map((product) => (
                             <Card
                                 key={product.id}
@@ -39,11 +39,14 @@ const BestSells = () => {
                                 percentage={product.discountPercentage}
                                 title={product.title}
                                 price={product.price}
-                                discountPrice={product.price - (product.price * (product.discountPercentage / 100)).toFixed(3)}
+                                discountPrice={Math.round(product.price - (product.price * (product.discountPercentage / 100)))}
                                 rating={product.rating}
                                 review={product.reviews?.length ?? 0}
                             />
                         ))}
+                        <button className='px-8 sm:px-10 lg:px-12 py-3 sm:py-4 bg-primary rounded-sm text-white cursor-pointer text-sm sm:text-base hover:bg-red-600 transition-colors w-full sm:w-auto'>
+                            View All
+                        </button>
                     </div>
                 </Container>
             </div>

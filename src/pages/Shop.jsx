@@ -62,7 +62,7 @@ const Shop = () => {
             </div>
 
             <div className='flex justify-between'>
-              <div className=' w-[20%] '>
+              <div className='hidden lg:block lg:w-[20%]'>
                 <ul className='text-xl pt-10 space-y-4 w-54.25'>
                   <li onClick={() => dispatch(ProductReducer(products))} className='cursor-pointer'>All Products</li>
                   {
@@ -74,7 +74,7 @@ const Shop = () => {
                 </ul>
               </div>
 
-              <div className='w-[80%]'>
+              <div className='w-full lg:w-[80%]'>
                 <div>
                   {
                     loading ?

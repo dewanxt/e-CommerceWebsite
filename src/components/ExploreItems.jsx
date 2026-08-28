@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Container from './Container'
 import SecHead from './SecHead'
-import Slider from "react-slick";
 import Card from './Card';
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
 import axios from 'axios';
 
 const ExploreItems = () => {
-
     const [products, setProducts] = useState([])
 
+    // Fetch products for explore section
     useEffect(() => {
         const fetchProducts = async () => {
             let data = await axios.get('https://dummyjson.com/products?limit=8');
@@ -19,57 +16,22 @@ const ExploreItems = () => {
         fetchProducts()
     }, [])
 
-    function SampleNextArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-            <div
-                className=" w-11.5 h-11.5 bg-[#F5F5F5] rounded-full flex justify-center items-center absolute -top-20 right-0 cursor-pointer "
-                onClick={onClick}
-            >
-                <GoArrowRight className='text-2xl text-black ' />
-
-            </div>
-        );
-    }
-
-    function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-            <div
-                className=" w-11.5 h-11.5 bg-[#F5F5F5] rounded-full flex justify-center items-center absolute -top-20 right-15 cursor-pointer "
-                onClick={onClick}
-            >
-                <GoArrowLeft className='text-2xl text-black ' />
-
-            </div>
-        );
-    }
-
-    const SliderComponent = Slider?.default ?? Slider;
-
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
-    };
-
     return (
-        <div className='pt-17.75'>
+        <div className='pt-10 sm:pt-14 lg:pt-17.75'>
             <Container>
+                {/* Section header */}
                 <div>
                     <SecHead
                         title="Our Products"
                         heading="Explore Our Products"
                     />
                 </div>
-                <div>
-                    <SliderComponent {...settings} className='pt-15'>
-                        {products.map((product, index) => (
-                            <div key={product.id} className='space-y-15'>
+
+                <div className='mt-6 sm:mt-8 lg:mt-15'>
+                    {/* Products grid - responsive columns */}
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
+                        {products.map((product) => (
+                            <div key={product.id} className="transition-all duration-300 hover:shadow-lg rounded-lg">
                                 <Card
                                     id={product.id}
                                     productDetails={product}
@@ -77,27 +39,16 @@ const ExploreItems = () => {
                                     percentage={product.discountPercentage}
                                     title={product.title}
                                     price={product.price}
-                                    discountPrice={product.price - (product.price * (product.discountPercentage / 100)).toFixed(3)}
+                                    discountPrice={Math.round(product.price - (product.price * (product.discountPercentage / 100)))}
                                     rating={product.rating}
                                     review={product.reviews?.length ?? 0}
                                 />
-                                {products[index + 1] && (
-                                    <Card
-                                        id={products[index + 1].id}
-                                        productDetails={products[index + 1]}
-                                        imgSrc={products[index + 1].thumbnail}
-                                        percentage={products[index + 1].discountPercentage}
-                                        title={products[index + 1].title}
-                                        price={products[index + 1].price}
-                                        discountPrice={products[index + 1].price - (products[index + 1].price * (products[index + 1].discountPercentage / 100)).toFixed(3)}
-                                        rating={products[index + 1].rating}
-                                        review={products[index + 1].reviews?.length ?? 0}
-                                    />
-                                )}
                             </div>
                         ))}
-                    </SliderComponent>
-                    <button className=' block mx-auto mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
+                    </div>
+                    
+                    {/* View all products button */}
+                    <button className='block mx-auto mt-6 sm:mt-8 lg:mt-10 px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 bg-primary rounded-sm text-white cursor-pointer text-sm sm:text-base hover:bg-red-600 transition-colors w-full sm:w-auto'>
                         View All Products
                     </button>
                 </div>

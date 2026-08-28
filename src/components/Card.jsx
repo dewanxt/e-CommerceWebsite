@@ -109,7 +109,7 @@ const Card = ({ id, imgSrc, percentage, title, price, discountPrice, rating, rev
 
     return (
         <>
-            <div className={`group w-[270px] ${centerCard ? 'mx-auto' : ''}`}>
+            <div className={`group w-full max-w-67.5 ${centerCard ? 'mx-auto' : ''}`}>
                 <div className='relative overflow-hidden  bg-secondary'>
                     <span className='absolute left-3 top-3 px-3 py-2 bg-primary rounded-sm text-white text-xs'>{percentage}%</span>
                     <img onClick={handleProductDetails} src={imgSrc} alt="" className='px-10 py-8.75' />

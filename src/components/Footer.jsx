@@ -11,103 +11,104 @@ import { RiInstagramLine } from "react-icons/ri";
 import { FaLinkedinIn } from "react-icons/fa";
 
 
-
-
-
-
-
-
 const Footer = () => {
   return (
     <>
-      <div className='pt-35'>
+      <div className='pt-10 sm:pt-20 lg:pt-35'>
         <div className='bg-black text-white'>
           <Container>
-          <div className='flex justify-center pt-20 pb-15 gap-21.75 border-b border-neutral-800 '>
-            <div className='footerBox'>
-              <ul>
-                <li>Exclusive</li>
-                <li className='text-[20px]'>Subscribe</li>
-                <li>Get 10% off your first order</li>
-              </ul>
-              <div className='relative pl-4 py-3 bg-black border border-white rounded-md'>
-                <input type="text" className='pr-8 focus:outline-none focus:ring-0 text-[#FAFAFA]' placeholder='Write your email' />
-                <VscSend className='absolute top-3 right-4 text-2xl' />
+            {/* Main footer content */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 sm:gap-10 lg:gap-8 xl:gap-21.75 pt-10 sm:pt-14 lg:pt-20 pb-8 sm:pb-12 lg:pb-15 border-b border-neutral-800'>
+              
+              {/* Newsletter subscription section */}
+              <div className='space-y-4 sm:col-span-2 lg:col-span-1'>
+                <ul className='space-y-3'>
+                  <li className='text-2xl font-bold'>Exclusive</li>
+                  <li className='text-[18px] sm:text-[20px] font-medium'>Subscribe</li>
+                  <li className='text-sm sm:text-base text-gray-400'>Get 10% off your first order</li>
+                </ul>
                 
-
+                {/* Email input with send button */}
+                <div className='relative pl-4 py-2.5 sm:py-3 bg-black border border-white rounded-md max-w-xs'>
+                  <input 
+                    type="text" 
+                    className='pr-10 focus:outline-none focus:ring-0 text-[#FAFAFA] bg-transparent w-full text-sm sm:text-base' 
+                    placeholder='Write your email'
+                    aria-label="Email for newsletter"
+                  />
+                  <VscSend 
+                    className='absolute top-1/2 -translate-y-1/2 right-3 sm:right-4 text-xl sm:text-2xl cursor-pointer hover:text-primary transition-colors'
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className='footerBox'>
-              <ul>
-                <li>Support</li>
-                <li>111 Bijoy sarani, Dhaka,  DH 1515, Bangladesh.</li>
-                <li>exclusive@gmail.com</li>
-                <li>+88015-88888-9999</li>
-              </ul>
-            </div>
+              {/* Support contact information */}
+              <div className='space-y-3'>
+                <h2 className='text-lg sm:text-xl font-semibold mb-4'>Support</h2>
+                <ul className='space-y-3 text-sm sm:text-base text-gray-400'>
+                  <li>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>exclusive@gmail.com</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>+88015-88888-9999</li>
+                </ul>
+              </div>
 
-            <div className='footerBox'>
-              <ul>
-                <li>Account</li>
-                <li>My Account</li>
-                <li>Login / Register</li>
-                <li>Cart</li>
-                <li>Wishlist</li>
-                <li>Shop</li>
-              </ul>
-            </div>
+              {/* Account links */}
+              <div className='space-y-3'>
+                <h2 className='text-lg sm:text-xl font-semibold mb-4'>Account</h2>
+                <ul className='space-y-3 text-sm sm:text-base text-gray-400'>
+                  <li className='hover:text-white transition-colors cursor-pointer'>My Account</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Login / Register</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Cart</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Wishlist</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Shop</li>
+                </ul>
+              </div>
 
-            <div className='footerBox'>
-              <ul>
-                <li>Quick Link</li>
-                <li>Privacy Policy</li>
-                <li>Terms Of Use</li>
-                <li>FAQ</li>
-                <li>Contact</li>
-              </ul>
-            </div>
+              {/* Quick links */}
+              <div className='space-y-3'>
+                <h2 className='text-lg sm:text-xl font-semibold mb-4'>Quick Link</h2>
+                <ul className='space-y-3 text-sm sm:text-base text-gray-400'>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Privacy Policy</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Terms Of Use</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>FAQ</li>
+                  <li className='hover:text-white transition-colors cursor-pointer'>Contact</li>
+                </ul>
+              </div>
 
-            <div className='footerBox'>
-              <ul>
-                <li>Download App</li>
-                <li>Save $3 with App New User Only</li>
-              </ul>
-              <div className='flex gap-2'>
-                <img src={FooterQrcode} alt="" />
-                <div className='space-y-5'>
-                  <img src={PlayStore} alt="" />
-                  <img src={AppStore} alt="" />
+              {/* App download and social media section */}
+              <div className='space-y-5 sm:col-span-2 lg:col-span-1'>
+                <div>
+                  <h2 className='text-lg sm:text-xl font-semibold mb-2'>Download App</h2>
+                  <p className='text-sm text-gray-400'>Save $3 with App New User Only</p>
+                </div>
+                
+                {/* App store buttons */}
+                <div className='flex gap-3 sm:gap-4'>
+                  <img src={FooterQrcode} alt="QR Code for app download" className='w-20 h-20 sm:w-24 sm:h-24 lg:w-auto lg:h-auto object-contain' />
+                  <div className='space-y-3 sm:space-y-5'>
+                    <img src={PlayStore} alt="Download from Play Store" className='w-24 sm:w-28 lg:w-auto cursor-pointer hover:opacity-80 transition-opacity' />
+                    <img src={AppStore} alt="Download from App Store" className='w-24 sm:w-28 lg:w-auto cursor-pointer hover:opacity-80 transition-opacity' />
+                  </div>
                 </div>
 
+                {/* Social media links */}
+                <div className='flex gap-4 sm:gap-6 text-xl sm:text-2xl lg:text-3xl'>
+                  <GrFacebookOption className='cursor-pointer hover:text-primary transition-colors' aria-label="Facebook" />
+                  <RiTwitterLine className='cursor-pointer hover:text-primary transition-colors' aria-label="Twitter" />
+                  <RiInstagramLine className='cursor-pointer hover:text-primary transition-colors' aria-label="Instagram" />
+                  <FaLinkedinIn className='cursor-pointer hover:text-primary transition-colors' aria-label="LinkedIn" />
+                </div>
               </div>
-
-              <div className='flex gap-6 text-3xl'>
-                <GrFacebookOption />
-
-                <RiTwitterLine />
-                <RiInstagramLine />
-                <FaLinkedinIn />
-
-
-
-
-              </div>
-
             </div>
 
-          </div>
-
-          <div className='flex justify-center items-center gap-5 text-neutral-700 text-[16px] pt-4 pb-6'>
-            <div>
-            <FaRegCopyright />
+            {/* Copyright notice */}
+            <div className='flex justify-center items-center gap-3 sm:gap-5 text-neutral-700 text-sm sm:text-[16px] pt-4 pb-6'>
+              <FaRegCopyright className='text-base sm:text-lg' aria-hidden="true" />
+              <p>Copyright Rimel 2022. All right reserved</p>
             </div>
-            <p>Copyright Rimel 2022. All right reserved</p>
-          </div>
-
-        </Container>
+          </Container>
         </div>
-        
       </div>
     </>
   )

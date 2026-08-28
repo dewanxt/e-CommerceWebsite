@@ -4,25 +4,27 @@ import SecHead from './SecHead'
 import { countDownDateAndTime } from 'countdown-date-time';
 import CountDown from './CountDown';
 import Card from './Card';
-import Slider from "react-slick";
-import { GoArrowRight } from "react-icons/go";
-import { GoArrowLeft } from "react-icons/go";
 import axios from 'axios';
 
 const FlashSales = () => {
-
+    // Target date for flash sale countdown
     const conduct_date = '2026-08-30 12:00:00';
 
     const [count, setcount] = useState({})
     const [products, setProducts] = useState([])
 
+    // Update countdown timer every second
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             const countDown = countDownDateAndTime(conduct_date);
             setcount(countDown)
         }, 1000)
+        
+        // Cleanup interval on component unmount
+        return () => clearInterval(interval)
     }, [])
 
+    // Fetch flash sale products
     useEffect(() => {
         const fetchProducts = async () => {
             let data = await axios.get('https://dummyjson.com/products');
@@ -31,47 +33,12 @@ const FlashSales = () => {
         fetchProducts()
     }, [])
 
-    function SampleNextArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-            <div
-                className=" w-11.5 h-11.5 bg-[#F5F5F5] rounded-full flex justify-center items-center absolute -top-20 right-0 cursor-pointer "
-                onClick={onClick}
-            >
-                <GoArrowRight className='text-2xl text-black ' />
-            </div>
-        );
-    }
-
-    function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-            <div
-                className=" w-11.5 h-11.5 bg-[#F5F5F5] rounded-full flex justify-center items-center absolute -top-20 right-15 cursor-pointer "
-                onClick={onClick}
-            >
-                <GoArrowLeft className='text-2xl text-black ' />
-            </div>
-        );
-    }
-
-    const SliderComponent = Slider?.default ?? Slider;
-
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />
-    };
-
     return (
         <>
-            <div className='boxss pt-19.25' >
+            <div className='pt-10 sm:pt-14 lg:pt-19.25'>
                 <Container>
-                    <div className='flex items-end gap-21.25'>
+                    {/* Section header with countdown timer */}
+                    <div className='flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 lg:gap-21.25'>
                         <SecHead
                             title="Today's"
                             heading="Flash Sales"
@@ -83,10 +50,12 @@ const FlashSales = () => {
                             Seconds={count.seconds}
                         />
                     </div>
-                    <div className='mt-10 pb-14.25 w-full border-b border-gray-400'>
-                        <SliderComponent {...settings}>
-                            {products.map((product) => (
-                                <div key={product.id} className="px-3">
+
+                    <div className='mt-6 sm:mt-8 lg:mt-10 pb-8 sm:pb-10 lg:pb-14.25 w-full border-b border-gray-400'>
+                        {/* Products grid - responsive columns */}
+                        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
+                            {products.slice(0, 8).map((product) => (
+                                <div key={product.id}>
                                     <Card
                                         id={product.id}
                                         productDetails={product}
@@ -100,9 +69,9 @@ const FlashSales = () => {
                                     />
                                 </div>
                             ))}
-                        </SliderComponent>
+                        </div>
 
-                        <button className='block mx-auto mt-10 px-12 py-4 bg-primary rounded-sm text-white cursor-pointer'>
+                        <button className='block mx-auto mt-6 sm:mt-8 lg:mt-10 px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 bg-primary rounded-sm text-white cursor-pointer text-sm sm:text-base hover:bg-red-600 transition-colors w-full sm:w-auto'>
                             View All Products
                         </button>
                     </div>
