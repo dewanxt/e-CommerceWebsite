@@ -29,9 +29,9 @@ const ExploreItems = () => {
 
                 <div className='mt-6 sm:mt-8 lg:mt-15'>
                     {/* Products grid - responsive columns */}
-                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
+                    <div className='grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
                         {products.map((product) => (
-                            <div key={product.id} className="transition-all duration-300 hover:shadow-lg rounded-lg">
+                            <div key={product.id} className="rounded-lg">
                                 <Card
                                     id={product.id}
                                     productDetails={product}
@@ -46,9 +46,9 @@ const ExploreItems = () => {
                             </div>
                         ))}
                     </div>
-                    
+
                     {/* View all products button */}
-                    <button className='block mx-auto mt-6 sm:mt-8 lg:mt-10 px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 bg-primary rounded-sm text-white cursor-pointer text-sm sm:text-base hover:bg-red-600 transition-colors w-full sm:w-auto'>
+                    <button className='block mx-auto mt-6 sm:mt-8 lg:mt-10 px-8 sm:px-10 lg:px-12 py-3 sm:py-3.5 lg:py-4 bg-primary rounded-sm text-white cursor-pointer text-sm sm:text-base hover:bg-red-600 transition-colors'>
                         View All Products
                     </button>
                 </div>

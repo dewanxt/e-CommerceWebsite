@@ -19,7 +19,7 @@ const FlashSales = () => {
             const countDown = countDownDateAndTime(conduct_date);
             setcount(countDown)
         }, 1000)
-        
+
         // Cleanup interval on component unmount
         return () => clearInterval(interval)
     }, [])
@@ -53,7 +53,7 @@ const FlashSales = () => {
 
                     <div className='mt-6 sm:mt-8 lg:mt-10 pb-8 sm:pb-10 lg:pb-14.25 w-full border-b border-gray-400'>
                         {/* Products grid - responsive columns */}
-                        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
+                        <div className='grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8'>
                             {products.slice(0, 8).map((product) => (
                                 <div key={product.id}>
                                     <Card

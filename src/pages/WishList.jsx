@@ -25,7 +25,7 @@ const WishList = () => {
                     <span>Wishlist ({data.length})</span>
                     <button className='border border-gray-400 px-12 py-4 rounded-sm cursor-pointer'>Move All To Bag</button>
                 </div>
-                <div className='flex flex-wrap justify-start pt-15 gap-6'>
+                <div className='grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-6 pt-15'>
                     {
                         data.map((item) => {
 
@@ -59,7 +59,7 @@ const WishList = () => {
                             See All
                         </button>
                     </div>
-                    <div className='flex flex-wrap items-center justify-center pt-15'>
+                    <div className='grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-6 pt-15'>
                         {recommend.slice(0, showRecommend).map((item) => (
                             <Card
                                 key={item.id}

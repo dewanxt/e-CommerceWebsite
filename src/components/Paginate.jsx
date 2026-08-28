@@ -13,13 +13,13 @@ const Paginate = ({ itemsPerPage = 6, items: providedItems }) => {
     function Items({ currentItems }) {
         return (
             <>
-                <div className='flex flex-wrap gap-y-10 gap-x-7.5'>
+                <div className='grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-6 lg:gap-7.5'>
                     {currentItems &&
                         currentItems.map((item) => (
                             <div>
                                 <Card
                                     id={item.id}
-                                    productDetails = {item}
+                                    productDetails={item}
                                     imgSrc={item.thumbnail}
                                     percentage={item.discountPercentage}
                                     title={item.title}

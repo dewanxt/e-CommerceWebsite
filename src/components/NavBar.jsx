@@ -8,16 +8,7 @@ import { NavLink, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { FiUser } from "react-icons/fi";
 
-/**
- * NavBar Component
- * 
- * Main navigation bar with:
- * - Responsive mobile menu with slide animation
- * - Search functionality (desktop and mobile)
- * - Cart and wishlist indicators with item counts
- * - User account icon (visible on all devices)
- * - Navigation links with hover effects
- */
+
 const NavBar = () => {
   const navigate = useNavigate();
   
@@ -29,10 +20,7 @@ const NavBar = () => {
   const cart = useSelector(state => state.products.Cart);
   const wishList = useSelector(state => state.products.WishList);
 
-  /**
-   * Navigation items configuration
-   * Centralized for easier maintenance
-   */
+  
   const navigationItems = [
     { label: 'Home', path: '/' },
     { label: 'Contact', path: '/contact' },
@@ -70,12 +58,6 @@ const NavBar = () => {
     setIsSearchOpen(!isSearchOpen);
   };
 
-  /**
-   * Navigate to user account page
-   */
-  const handleUserClick = () => {
-    navigate('/account');
-  };
 
   return (
     <div className='border-b-2 border-gray-200 relative'>
@@ -170,7 +152,7 @@ const NavBar = () => {
 
               {/* Cart icon with count */}
               <div 
-                onClick={() => navigate("/Cart")} 
+                onClick={() => handleNavigation("/Cart")} 
                 className='relative cursor-pointer'
                 role="button"
                 aria-label={`Cart (${cart.length} items)`}
@@ -185,12 +167,10 @@ const NavBar = () => {
 
               {/* User account icon - now visible on all screens */}
               <div 
-                onClick={handleUserClick}
+                onClick={()=> handleNavigation("/Login")}
                 className='cursor-pointer'
                 role="button"
                 aria-label="User account"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && handleUserClick()}
               >
                 <FiUser className='text-2xl sm:text-3xl hover:text-primary transition-colors' />
               </div>
@@ -274,4 +254,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBar

@@ -37,7 +37,7 @@ const Categories = () => {
                     {/* Categories grid */}
                     <div className='mt-6 sm:mt-8 lg:mt-10 pb-10 sm:pb-14 lg:pb-17.5 w-full border-b border-gray-400'>
                         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6'>
-                            <div className="transition-all duration-300 hover:shadow-lg">
+                            <div className="">
                                 <CategoryItems title="Phones">
                                     <svg width="40" height="40" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
                                         <g clip-path="url(#clip0_13191_1056)">
@@ -55,7 +55,7 @@ const Categories = () => {
                                 </CategoryItems>
                             </div>
 
-                            <div className="transition-all duration-300 hover:shadow-lg">
+                            <div className="">
                                 <CategoryItems title="Computers">
                                     <svg width="40" height="40" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
                                         <g clip-path="url(#clip0_13191_179)">
@@ -74,7 +74,7 @@ const Categories = () => {
                                 </CategoryItems>
                             </div>
 
-                            <div className="transition-all duration-300 hover:shadow-lg">
+                            <div className="">
                                 <CategoryItems title="SmartWatch">
                                     <svg width="40" height="40" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
                                         <g clip-path="url(#clip0_13191_609)">
@@ -94,7 +94,7 @@ const Categories = () => {
                                 </CategoryItems>
                             </div>
 
-                            <div className="transition-all duration-300 hover:shadow-lg">
+                            <div className="">
                                 <CategoryItems title="Monitor">
                                     <svg width="40" height="40" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
                                         <g clip-path="url(#clip0_13191_monitor)">
@@ -112,7 +112,7 @@ const Categories = () => {
                                 </CategoryItems>
                             </div>
 
-                            <div className="transition-all duration-300 hover:shadow-lg">
+                            <div className="">
                                 <CategoryItems title="Camera">
                                     <svg width="40" height="40" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
                                         <g clip-path="url(#clip0_13201_1620)">
@@ -128,7 +128,7 @@ const Categories = () => {
                                 </CategoryItems>
                             </div>
 
-                            <div className="transition-all duration-300 hover:shadow-lg">
+                            <div className="">
                                 <CategoryItems title="HeadPhones">
                                     <svg width="40" height="40" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14">
                                         <g clip-path="url(#clip0_13191_684)">

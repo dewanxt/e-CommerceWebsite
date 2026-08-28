@@ -36,7 +36,7 @@ const Cart = () => {
                 title={(item.title).slice(0, 15)}
                 price={item.price}
                 quantity={item.quantity || 1}
-                subTotal={item.price * (item.quantity || 1)}
+                subTotal={item.price * (item.quantity ?? 1)}
               />
             ))}
           </div>
