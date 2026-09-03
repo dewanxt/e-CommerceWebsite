@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Container from './Container';
-import Logo from '../assets/Logo.png';
 import { IoHeartOutline, IoMenu, IoClose } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
-import { NavLink, useNavigate, useLocation } from 'react-router'; 
+import { useNavigate, useLocation } from 'react-router'; 
 import { useSelector } from 'react-redux';
 import { FiUser } from "react-icons/fi";
 
@@ -52,12 +51,34 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Toggle body class to hide banner elements
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('mobile-menu-open');
+    } else {
+      document.body.classList.remove('mobile-menu-open');
+    }
+    return () => document.body.classList.remove('mobile-menu-open');
+  }, [isMenuOpen]);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
   const handleNavigation = (path) => {
     navigate(path);
     closeMenu();
+  };
+
+  const handleLogoClick = () => {
+    closeMenu();
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   const handleAboutClick = () => {
@@ -94,13 +115,13 @@ const NavBar = () => {
   };
 
   return (
-    <div className='border-b-2 border-gray-200 relative'>
+    <div className='sticky top-0 z-50 border-b-2 border-gray-200 bg-white relative'>
       <Container>
         <div className='flex items-center justify-between py-4 lg:py-7'>
           
           <button 
             onClick={toggleMenu}
-            className='lg:hidden text-3xl cursor-pointer hover:text-primary transition-colors'
+            className='lg:hidden text-3xl cursor-pointer hover:text-primary transition-colors z-0'
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
           >
@@ -109,8 +130,8 @@ const NavBar = () => {
 
           <div className='flex items-center gap-3'>
             <h1 
-              onClick={() => handleNavigation("/")} 
-              className='text-2xl lg:text-3xl font-bold cursor-pointer hover:text-primary transition-colors'
+              onClick={handleLogoClick} 
+              className='text-2xl lg:text-3xl font-bold cursor-pointer'
             >
               Exclusive
             </h1>
@@ -256,7 +277,6 @@ const NavBar = () => {
           </div>
         </div>
 
-        {/* FIXED RESPONSIVE SEARCH BAR */}
         <div className={`md:hidden relative transition-all duration-300 ease-in-out ${
           isSearchOpen ? 'max-h-80 opacity-100 pb-4 px-4' : 'max-h-0 opacity-0'
         }`}>
@@ -275,7 +295,6 @@ const NavBar = () => {
               <HiMiniMagnifyingGlass className='absolute top-1/2 -translate-y-1/2 right-3 text-2xl cursor-pointer' />
             </div>
 
-            {/* Changed overflow-visible to allow dropdown to pop out */}
             {showSuggestions && searchTerm && (filteredProducts.length > 0 || filteredCategories.length > 0) && (
               <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-[100] max-h-56 overflow-y-auto'>
                 {filteredCategories.length > 0 && (
@@ -321,7 +340,8 @@ const NavBar = () => {
         </div>
       </Container>
 
-      <div className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
+      {/* CHANGED: z-50 to z-[999] so it covers everything */}
+      <div className={`lg:hidden fixed inset-0 z-[999] transition-all duration-300 ease-in-out ${
         isMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
       }`}>
         

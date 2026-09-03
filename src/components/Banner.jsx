@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from './Container'
 import SlideImg1 from '../assets/Iphone 13 Series.png'
 import SlideImg2 from '../assets/Iphone 14 Series.jpg'
@@ -28,6 +28,49 @@ const SliderArrow = ({ direction, onClick }) => (
 const Banner = () => {
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false)
     const [expandedCategory, setExpandedCategory] = useState(null)
+    const [isNavMenuOpen, setIsNavMenuOpen] = useState(false) // NEW: State to track if Navbar menu is open
+
+    // NEW: Listen for Navbar menu state
+    useEffect(() => {
+        const checkNavMenu = () => {
+            if (document.body.classList.contains('mobile-menu-open')) {
+                setIsNavMenuOpen(true);
+                setIsCategoriesOpen(false); // Close banner menu if navbar menu opens
+            } else {
+                setIsNavMenuOpen(false);
+            }
+        };
+
+        checkNavMenu();
+        const observer = new MutationObserver(checkNavMenu);
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+        return () => observer.disconnect();
+    }, []);
+
+    // CRITICAL FIX: Disable Slick's drag/swipe when categories are open
+    useEffect(() => {
+        const sliderElements = document.querySelectorAll('.slick-slider, .slick-list, .slick-track');
+        
+        if (isCategoriesOpen) {
+            sliderElements.forEach(el => {
+                el.style.pointerEvents = 'none';
+                el.style.zIndex = '0';
+            });
+        } else {
+            sliderElements.forEach(el => {
+                el.style.pointerEvents = 'auto';
+                el.style.zIndex = '';
+            });
+        }
+        
+        return () => {
+            sliderElements.forEach(el => {
+                el.style.pointerEvents = 'auto';
+                el.style.zIndex = '';
+            });
+        };
+    }, [isCategoriesOpen]);
 
     // Slider configuration
     var settings = {
@@ -104,7 +147,8 @@ const Banner = () => {
                     {/* Main content area */}
                     <div className='w-full lg:w-[80%]'>
                         {/* Mobile categories menu */}
-                        <div className='lg:hidden relative z-20 mb-4'>
+                        {/* FIXED: Hides the entire button when Navbar mobile menu is open */}
+                        <div className={`lg:hidden relative z-[100] mb-4 ${isNavMenuOpen ? 'hidden' : 'block'}`}>
                             <button
                                 onClick={toggleCategories}
                                 className='flex items-center gap-2 px-2 py-1 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors mt-2'
@@ -115,22 +159,24 @@ const Banner = () => {
                                     <RxHamburgerMenu className='text-xl' />
                                 )}
                                 <span className='text-sm'>Categories</span>
-
                             </button>
 
-                            {/* Expandable categories dropdown */}
-                            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isCategoriesOpen ? 'max-h-[500px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                            {/* Expanded dropdown */}
+                            <div className={`overflow-visible transition-all duration-300 ease-in-out ${isCategoriesOpen ? 'max-h-screen opacity-100 mt-2' : 'max-h-0 opacity-0 pointer-events-none'}`}>
                                 <ul className='bg-white border border-gray-200 rounded-lg shadow-lg'>
                                     {categories.map((category, index) => (
                                         <li key={index} className='border-b border-gray-100 last:border-b-0'>
                                             <div
-                                                onClick={() => category.hasSubmenu ? toggleCategory(category.name) : null}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    if (category.hasSubmenu) toggleCategory(category.name);
+                                                }}
                                                 className='flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors'
                                             >
                                                 {category.hasSubmenu ? (
                                                     <span className='text-sm font-medium'>{category.name}</span>
                                                 ) : (
-                                                    <a href={`/${category.name.toLowerCase().replace(/ &/g, '_&_').replace(/ /g, '_')}`} className='text-sm block flex-1'>
+                                                    <a href={`/${category.name.toLowerCase().replace(/ &/g, '_&_').replace(/ /g, '_')}`} className='text-sm block flex-1' onClick={(e) => e.stopPropagation()}>
                                                         {category.name}
                                                     </a>
                                                 )}

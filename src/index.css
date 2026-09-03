@@ -107,3 +107,8 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Hide banner categories button when mobile navbar menu is open */
+body.mobile-menu-open .banner-categories-btn {
+  display: none !important;
+}
