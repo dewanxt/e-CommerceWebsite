@@ -36,9 +36,7 @@ const ProductDetails = () => {
 
     useEffect(() => {
         getAllProducts()
-    }, [])
-
-
+    }, [id])
 
     return (
         <>
@@ -46,97 +44,106 @@ const ProductDetails = () => {
                 <Container>
                     <BreadCrump />
 
-                    <div className=' flex justify-between mt-20'>
-                        <div className='flex gap-7.5'>
-                            <div className='space-y-4 '>
+                    {/* Changed to flex-col on mobile, flex-row on desktop */}
+                    <div className='flex flex-col lg:flex-row justify-between mt-10 lg:mt-20 gap-10'>
+                        
+                        {/* Image Section */}
+                        <div className='flex flex-col-reverse lg:flex-row gap-4 w-full lg:w-1/2'>
+                            
+                            {/* Thumbnails: Flex-row scroll on mobile, flex-col on desktop */}
+                            <div className='flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0'>
                                 {
-                                    images.map((item) => <img className='w-40.5 h-42.5 bg-secondary' src={item} alt="" />)
+                                    images.map((item) => (
+                                        <img 
+                                            key={item} 
+                                            className='w-20 h-20 lg:w-24 lg:h-24 object-cover bg-[#F5F5F5] cursor-pointer shrink-0' 
+                                            src={item} 
+                                            alt="" 
+                                        />
+                                    ))
                                 }
                             </div>
-                            <div>
-                                <img className='w-125 h-150 bg-secondary' src={product.thumbnail} alt="" />
+
+                            {/* Main Image */}
+                            <div className='flex-1'>
+                                <img 
+                                    className='w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover bg-[#F5F5F5] rounded' 
+                                    src={product.thumbnail} 
+                                    alt="" 
+                                />
                             </div>
                         </div>
-                        <div className='w-100 bprder-b'>
-                            <h2 className='text-2xl font-semibold'>{product.title}</h2>
-                            <div className='flex gap-2 py-4'>
+
+                        {/* Product Details Section */}
+                        <div className='w-full lg:w-1/2'>
+                            <h2 className='text-2xl lg:text-3xl font-semibold'>{product.title}</h2>
+                            
+                            <div className='flex flex-wrap gap-2 py-4 items-center'>
                                 <Rate allowHalf value={product.rating} />
-                                <h4>({product?.reviews && product.reviews.length} Reviews)</h4>
-                                <h4 className='text-green-400 border-l pl-2'>{product.availabilityStatus}</h4>
+                                <h4 className='text-gray-500 text-sm'>({product?.reviews && product.reviews.length} Reviews)</h4>
+                                <h4 className='text-green-500 border-l border-gray-300 pl-2 text-sm'>{product.availabilityStatus}</h4>
                             </div>
-                            <h2 className='text-2xl'>${product.price}</h2>
-                            <p className='py-6 border-b'>{product.description}</p>
+                            
+                            <h2 className='text-2xl font-semibold'>${product.price}</h2>
+                            
+                            <p className='py-4 lg:py-6 border-b border-gray-200 text-gray-600'>{product.description}</p>
 
-
-                            {/* buying part */}
-                            <div className=" flex items-center justify-between pt-6">
-
-                                <div className="max-w-md rounded-lg font-sans">
-
-                                    <div className="flex items-center flex-wrap mb-4">
-                                        <span className="text-xl mr-3 min-w-15">Colours:</span>
-                                    </div>
-
-
-                                    <div className="flex items-center flex-wrap mb-4">
-                                        <span className="text-xl mr-3 min-w-15">Size:</span>
-                                        <div className="flex gap-2">
-                                            <button className="px-3 py-1.5 border border-gray-300 rounded text-sm bg-white text-black hover:bg-primary hover:text-white cursor-pointer transition-all duration-200">
-                                                XS
-                                            </button>
-                                            <button className="px-3 py-1.5 border border-gray-300 rounded text-sm bg-white text-black hover:bg-primary hover:text-white cursor-pointer transition-all duration-200">
-                                                S
-                                            </button>
-                                            <button className="px-3 py-1.5 border border-gray-300 rounded text-sm bg-white text-black hover:bg-primary hover:text-white transition-all duration-200">
-                                                M
-                                            </button>
-                                            <button className="px-3 py-1.5 border border-gray-300 rounded text-sm bg-white text-black hover:bg-primary hover:text-white cursor-pointer transition-all duration-200">
-                                                L
-                                            </button>
-                                            <button className="px-3 py-1.5 border border-gray-300 rounded text-sm bg-white text-black hover:bg-primary hover:text-white cursor-pointer transition-all duration-200">
-                                                XL
-                                            </button>
+                            {/* Buying part */}
+                            <div className="flex items-center justify-between pt-6">
+                                <div className="w-full">
+                                    
+                                    {/* Colors */}
+                                    <div className="flex items-center mb-4">
+                                        <span className="text-lg lg:text-xl mr-4 w-16">Colours:</span>
+                                        <div className='flex gap-2'>
+                                            <button className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-red-500 border border-gray-300"></button>
+                                            <button className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-blue-500 border border-gray-300"></button>
                                         </div>
                                     </div>
 
-
-                                    <div className="flex items-center flex-wrap mb-4">
-                                        <div className="flex items-center border border-gray-300 rounded overflow-hidden mr-3">
-                                            <button className="px-3.5 py-1.5 border-none cursor-pointer text-xl font-bold text-black hover:bg-primary hover:text-white transition-colors">
-                                                −
-                                            </button>
-                                            <span className="px-4 py-1.5 text-base border-x border-gray-300 min-w-7.5 text-center">
-                                                1
-                                            </span>
-                                            <button className="px-3.5 py-1.5 border-none cursor-pointer text-xl font-bold text-black hover:bg-primary hover:text-white transition-colors">
-                                                +
-                                            </button>
+                                    {/* Sizes */}
+                                    <div className="flex items-center mb-4">
+                                        <span className="text-lg lg:text-xl mr-4 w-16">Size:</span>
+                                        <div className="flex flex-wrap gap-2">
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded text-xs lg:text-sm bg-white text-black hover:bg-[#DB4444] hover:text-white cursor-pointer transition-all duration-200">XS</button>
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded text-xs lg:text-sm bg-white text-black hover:bg-[#DB4444] hover:text-white cursor-pointer transition-all duration-200">S</button>
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded text-xs lg:text-sm bg-white text-black hover:bg-[#DB4444] hover:text-white cursor-pointer transition-all duration-200">M</button>
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded text-xs lg:text-sm bg-white text-black hover:bg-[#DB4444] hover:text-white cursor-pointer transition-all duration-200">L</button>
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded text-xs lg:text-sm bg-white text-black hover:bg-[#DB4444] hover:text-white cursor-pointer transition-all duration-200">XL</button>
                                         </div>
-                                        <button className="px-12 py-2.5 bg-primary text-white border-none rounded cursor-pointer text-base">
+                                    </div>
+
+                                    {/* Quantity and Buy Now */}
+                                    <div className="flex flex-wrap items-center gap-3 mb-6">
+                                        <div className="flex items-center border border-gray-300 rounded overflow-hidden">
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border-none cursor-pointer text-lg lg:text-xl font-bold text-black hover:bg-[#DB4444] hover:text-white transition-colors">−</button>
+                                            <span className="px-4 py-1.5 lg:px-5 lg:py-2 text-sm lg:text-base border-x border-gray-300 text-center">1</span>
+                                            <button className="px-3 py-1.5 lg:px-4 lg:py-2 border-none cursor-pointer text-lg lg:text-xl font-bold text-black hover:bg-[#DB4444] hover:text-white transition-colors">+</button>
+                                        </div>
+                                        <button className="px-8 lg:px-10 py-2.5 lg:py-3 bg-[#DB4444] text-white border-none rounded cursor-pointer text-sm lg:text-base font-medium hover:bg-red-700 transition-colors">
                                             Buy Now
                                         </button>
-                                        <div className='ml-5 p-2.5 text-xl font-bold border border-gray-300 rounded hover:bg-primary hover:text-white transition-colors'>
+                                        <div className='p-2.5 lg:p-3 text-lg lg:text-xl border border-gray-300 rounded hover:bg-[#DB4444] hover:text-white cursor-pointer transition-colors'>
                                             <IoHeartOutline />
                                         </div>
                                     </div>
 
-
-                                    <div className="mt-10 w-100 border border-gray-400 rounded">
-                                        <div className=" flex items-center pt-6 pb-4 pr- border-b border-gray-400">
-                                            <TbTruckDelivery className='text-3xl' />
+                                    {/* Delivery Info */}
+                                    <div className="mt-8 w-full border border-gray-200 rounded">
+                                        <div className="flex items-center py-4 px-4 border-b border-gray-200 gap-4">
+                                            <TbTruckDelivery className='text-2xl lg:text-3xl shrink-0' />
                                             <div>
-                                                <span className=" font-semibold block text-gray-800 text-lg">Free Delivery</span>
-                                                <span className=" text-base underline">
+                                                <span className="font-semibold block text-gray-800 text-base lg:text-lg">Free Delivery</span>
+                                                <span className="text-xs lg:text-sm underline text-gray-600">
                                                     Enter your postal code for Delivery Availability
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className=" deliv flex items-center pt-6 pb-4 pr-">
-                                            <GrPowerCycle className='text-3xl' />
-
+                                        <div className="flex items-center py-4 px-4 gap-4">
+                                            <GrPowerCycle className='text-2xl lg:text-3xl shrink-0' />
                                             <div>
-                                                <span className="font-semibold block text-gray-800 text-lg">Return Delivery</span>
-                                                <span className=" text-xs underline">
+                                                <span className="font-semibold block text-gray-800 text-base lg:text-lg">Return Delivery</span>
+                                                <span className="text-xs lg:text-sm underline text-gray-600">
                                                     Free 30 Days Delivery Returns. Details
                                                 </span>
                                             </div>
@@ -145,14 +152,13 @@ const ProductDetails = () => {
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
-                    <div className='pt-35'>
-                        <SecHead
-                            title="Related"
-                        />
-                        <div className='flex flex-wrap pt-17.5'>
+
+                    {/* Related Products */}
+                    <div className='pt-32'>
+                        <SecHead title="Related" />
+                        {/* Changed grid to be responsive */}
+                        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-10'>
                             {relatedProducts.slice(0, 4).map((item) => (
                                 <Card
                                     key={item.id}
@@ -162,7 +168,7 @@ const ProductDetails = () => {
                                     percentage={item.discountPercentage}
                                     title={item.title}
                                     price={item.price}
-                                    discountPrice={item.price - (item.price * (item.discountPercentage / 100)).toFixed(3)}
+                                    discountPrice={Math.round(item.price - (item.price * (item.discountPercentage / 100)))}
                                     rating={item.rating}
                                     review={item.reviews?.length ?? 0}
                                 />

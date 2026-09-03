@@ -14,7 +14,8 @@ import { FaLinkedinIn } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
-      <div className='pt-10 sm:pt-20 lg:pt-35'>
+      {/* Added id="footer" here */}
+      <div id="footer" className='pt-10 sm:pt-20 lg:pt-35'>
         <div className='bg-black text-white'>
           <Container>
             {/* Main footer content */}

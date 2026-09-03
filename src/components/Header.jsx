@@ -39,25 +39,28 @@ const Header = () => {
     <div className="bg-black text-white py-3">
       <Container>
         <div className="flex flex-col lg:flex-row justify-between items-center gap-3 lg:gap-0">
+          
           {/* Spacer div for desktop layout balance */}
           <div className="hidden lg:block" aria-hidden="true" />
 
-          {/* Promotional message */}
-          <p className="text-sm gap-2 flex flex-col sm:flex-row items-center text-center px-2">
-            <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!</span>
+          {/* Promotional message - Entire block is clickable on mobile */}
+          <div 
+            onClick={handleShopNavigation}
+            className="flex flex-col sm:flex-row items-center text-center px-4 sm:px-0 cursor-pointer group"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && handleShopNavigation()}
+            aria-label="Shop now for summer sale"
+          >
+            <p className="text-sm">
+              Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+            </p>
             
-            {/* Shop navigation link */}
-            <span
-              onClick={handleShopNavigation}
-              className="underline font-bold cursor-pointer hover:text-gray-300 transition-colors"
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => e.key === 'Enter' && handleShopNavigation()}
-              aria-label="Shop now for summer sale"
-            >
+            {/* Shop now link */}
+            <span className="underline font-bold ml-0 sm:ml-2 mt-1 sm:mt-0 group-hover:text-gray-300 transition-colors">
               ShopNow
             </span>
-          </p>
+          </div>
 
           {/* Language selector */}
           <select

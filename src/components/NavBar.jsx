@@ -1,70 +1,103 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Container from './Container';
 import Logo from '../assets/Logo.png';
 import { IoHeartOutline, IoMenu, IoClose } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useNavigate, useLocation } from 'react-router'; 
 import { useSelector } from 'react-redux';
 import { FiUser } from "react-icons/fi";
 
-
 const NavBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   
-  // State management for UI interactions
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchRef = useRef(null);
 
-  // Get cart and wishlist data from Redux store
   const cart = useSelector(state => state.products.Cart);
   const wishList = useSelector(state => state.products.WishList);
+  const products = useSelector(state => state.products.value);
 
-  
   const navigationItems = [
     { label: 'Home', path: '/' },
     { label: 'Contact', path: '/contact' },
-    { label: 'About', path: '/about' },
     { label: 'Sign Up', path: '/signup' },
   ];
 
-  /**
-   * Toggle mobile menu visibility
-   */
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const searchTermLower = searchTerm.toLowerCase();
 
-  /**
-   * Close mobile menu
-   */
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const filteredProducts = products.filter(product =>
+    product.title.toLowerCase().includes(searchTermLower) ||
+    product.category.toLowerCase().includes(searchTermLower) ||
+    product.brand?.toLowerCase().includes(searchTermLower)
+  ).slice(0, 5);
 
-  /**
-   * Handle navigation with menu closure
-   * @param {string} path - Route path to navigate to
-   */
+  const categories = [...new Set(products.map(product => product.category))];
+  const filteredCategories = categories.filter(category =>
+    category.toLowerCase().includes(searchTermLower)
+  ).slice(0, 3);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
   const handleNavigation = (path) => {
     navigate(path);
     closeMenu();
   };
 
-  /**
-   * Toggle mobile search bar visibility
-   */
-  const toggleSearch = () => {
-    setIsSearchOpen(!isSearchOpen);
+  const handleAboutClick = () => {
+    closeMenu();
+    if (location.pathname === '/') {
+      document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
+  const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setShowSuggestions(true);
+  };
+
+  const handleProductClick = (productId) => {
+    setSearchTerm('');
+    setShowSuggestions(false);
+    setIsSearchOpen(false);
+    navigate(`/product/${productId}`);
+  };
+
+  const handleCategoryClick = (category) => {
+    setSearchTerm('');
+    setShowSuggestions(false);
+    setIsSearchOpen(false);
+    navigate(`/shop?category=${category}`);
+  };
 
   return (
     <div className='border-b-2 border-gray-200 relative'>
       <Container>
         <div className='flex items-center justify-between py-4 lg:py-7'>
           
-          {/* Mobile menu toggle button */}
           <button 
             onClick={toggleMenu}
             className='lg:hidden text-3xl cursor-pointer hover:text-primary transition-colors'
@@ -74,7 +107,6 @@ const NavBar = () => {
             {isMenuOpen ? <IoClose /> : <IoMenu />}
           </button>
 
-          {/* Brand logo */}
           <div className='flex items-center gap-3'>
             <h1 
               onClick={() => handleNavigation("/")} 
@@ -82,11 +114,8 @@ const NavBar = () => {
             >
               Exclusive
             </h1>
-            {/* Alternative image logo */}
-            {/* <img src={Logo} alt="Exclusive Logo" /> */}
           </div>
 
-          {/* Desktop navigation links */}
           <nav aria-label="Main navigation">
             <ul className='hidden lg:flex gap-12 text-xl'>
               {navigationItems.map((item) => (
@@ -97,32 +126,85 @@ const NavBar = () => {
                 >
                   <span className='relative inline-block'>
                     {item.label}
-                    {/* Animated underline on hover */}
                     <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
                   </span>
                 </li>
               ))}
+              
+              <li 
+                onClick={handleAboutClick} 
+                className='cursor-pointer group'
+              >
+                <span className='relative inline-block'>
+                  About
+                  <span className='absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full'></span>
+                </span>
+              </li>
             </ul>
           </nav>
 
-          {/* Search and action icons */}
           <div className='flex items-center gap-2 sm:gap-4 lg:gap-6'>
             
-            {/* Desktop search bar */}
-            <div className='hidden md:block relative pl-5 py-2.5 bg-[#F5F5F5] rounded'>
-              <input 
-                type="text" 
-                className='pr-12 bg-transparent focus:outline-none focus:ring-0' 
-                placeholder='What are you looking for?'
-                aria-label="Search products"
-              />
-              <HiMiniMagnifyingGlass 
-                className='absolute top-1/2 -translate-y-1/2 right-3 text-2xl cursor-pointer hover:text-primary transition-colors'
-                aria-hidden="true"
-              />
+            <div className='hidden md:block relative' ref={searchRef}>
+              <div className='relative pl-5 py-2.5 bg-[#F5F5F5] rounded'>
+                <input 
+                  type="text" 
+                  className='pr-12 bg-transparent focus:outline-none focus:ring-0' 
+                  placeholder='Search products or categories...'
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  onFocus={() => setShowSuggestions(true)}
+                  aria-label="Search products"
+                />
+                <HiMiniMagnifyingGlass 
+                  className='absolute top-1/2 -translate-y-1/2 right-3 text-2xl cursor-pointer hover:text-primary transition-colors'
+                  aria-hidden="true"
+                />
+              </div>
+
+              {showSuggestions && searchTerm && (filteredProducts.length > 0 || filteredCategories.length > 0) && (
+                <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-64 overflow-y-auto'>
+                  {filteredCategories.length > 0 && (
+                    <div className='px-4 py-2'>
+                      <p className='text-xs font-semibold text-gray-500 uppercase mb-1'>Categories</p>
+                      {filteredCategories.map((category, index) => (
+                        <div
+                          key={`category-${index}`}
+                          onClick={() => handleCategoryClick(category)}
+                          className='flex items-center gap-2 px-2 py-1.5 cursor-pointer hover:bg-gray-50 transition-colors rounded'
+                        >
+                          <span className='text-sm capitalize'>{category}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  
+                  {filteredProducts.length > 0 && (
+                    <div className='px-4 py-2 border-t border-gray-100'>
+                      <p className='text-xs font-semibold text-gray-500 uppercase mb-1'>Products</p>
+                      {filteredProducts.map((product) => (
+                        <div
+                          key={product.id}
+                          onClick={() => handleProductClick(product.id)}
+                          className='flex items-center gap-3 px-2 py-1.5 cursor-pointer hover:bg-gray-50 transition-colors rounded'
+                        >
+                          <img 
+                            src={product.thumbnail} 
+                            alt={product.title}
+                            className='w-8 h-8 object-cover rounded'
+                          />
+                          <div className='flex-1 min-w-0'>
+                            <p className='text-sm font-medium truncate'>{product.title}</p>
+                            <p className='text-xs text-gray-500'>${product.price} • {product.category}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* Mobile search toggle */}
             <button 
               onClick={toggleSearch}
               className='md:hidden text-2xl cursor-pointer hover:text-primary transition-colors'
@@ -132,10 +214,8 @@ const NavBar = () => {
               <HiMiniMagnifyingGlass />
             </button>
 
-            {/* Action icons: wishlist, cart, user */}
             <div className='flex items-center gap-3 sm:gap-4 '>
               
-              {/* Wishlist icon with count */}
               <div 
                 onClick={() => navigate("/WishList")} 
                 className='relative cursor-pointer'
@@ -150,7 +230,6 @@ const NavBar = () => {
                 )}
               </div>
 
-              {/* Cart icon with count */}
               <div 
                 onClick={() => handleNavigation("/Cart")} 
                 className='relative cursor-pointer'
@@ -165,7 +244,6 @@ const NavBar = () => {
                 )}
               </div>
 
-              {/* User account icon - now visible on all screens */}
               <div 
                 onClick={()=> handleNavigation("/Login")}
                 className='cursor-pointer'
@@ -178,29 +256,75 @@ const NavBar = () => {
           </div>
         </div>
 
-        {/* Mobile search bar with slide animation */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isSearchOpen ? 'max-h-20 opacity-100 pb-4 px-4' : 'max-h-0 opacity-0'
+        {/* FIXED RESPONSIVE SEARCH BAR */}
+        <div className={`md:hidden relative transition-all duration-300 ease-in-out ${
+          isSearchOpen ? 'max-h-80 opacity-100 pb-4 px-4' : 'max-h-0 opacity-0'
         }`}>
-          <div className='relative pl-5 py-2.5 bg-[#F5F5F5] rounded w-full'>
-            <input 
-              type="text" 
-              className='pr-12 bg-transparent focus:outline-none focus:ring-0 w-full' 
-              placeholder='What are you looking for?'
-              autoFocus={isSearchOpen}
-              aria-label="Search products"
-            />
-            <HiMiniMagnifyingGlass className='absolute top-1/2 -translate-y-1/2 right-3 text-2xl cursor-pointer' />
+          <div className='relative' ref={searchRef}>
+            <div className='relative pl-5 py-2.5 bg-[#F5F5F5] rounded w-full'>
+              <input 
+                type="text" 
+                className='pr-12 bg-transparent focus:outline-none focus:ring-0 w-full' 
+                placeholder='Search products or categories...'
+                value={searchTerm}
+                onChange={handleSearchChange}
+                onFocus={() => setShowSuggestions(true)}
+                autoFocus={isSearchOpen}
+                aria-label="Search products"
+              />
+              <HiMiniMagnifyingGlass className='absolute top-1/2 -translate-y-1/2 right-3 text-2xl cursor-pointer' />
+            </div>
+
+            {/* Changed overflow-visible to allow dropdown to pop out */}
+            {showSuggestions && searchTerm && (filteredProducts.length > 0 || filteredCategories.length > 0) && (
+              <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg z-[100] max-h-56 overflow-y-auto'>
+                {filteredCategories.length > 0 && (
+                  <div className='px-3 py-1.5'>
+                    <p className='text-[10px] font-semibold text-gray-500 uppercase mb-0.5'>Categories</p>
+                    {filteredCategories.map((category, index) => (
+                      <div
+                        key={`category-${index}`}
+                        onClick={() => handleCategoryClick(category)}
+                        className='flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-gray-50 transition-colors rounded'
+                      >
+                        <span className='text-xs capitalize'>{category}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {filteredProducts.length > 0 && (
+                  <div className='px-3 py-1.5 border-t border-gray-100'>
+                    <p className='text-[10px] font-semibold text-gray-500 uppercase mb-0.5'>Products</p>
+                    {filteredProducts.map((product) => (
+                      <div
+                        key={product.id}
+                        onClick={() => handleProductClick(product.id)}
+                        className='flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-gray-50 transition-colors rounded'
+                      >
+                        <img 
+                          src={product.thumbnail} 
+                          alt={product.title}
+                          className='w-6 h-6 object-cover rounded'
+                        />
+                        <div className='flex-1 min-w-0'>
+                          <p className='text-xs font-medium truncate'>{product.title}</p>
+                          <p className='text-[10px] text-gray-500'>${product.price} • {product.category}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </Container>
 
-      {/* Mobile menu overlay with slide animation */}
       <div className={`lg:hidden fixed inset-0 z-50 transition-all duration-300 ease-in-out ${
         isMenuOpen ? 'pointer-events-auto' : 'pointer-events-none'
       }`}>
         
-        {/* Semi-transparent overlay */}
         <div 
           className={`absolute inset-0 bg-black transition-opacity duration-300 ease-in-out ${
             isMenuOpen ? 'opacity-50' : 'opacity-0'
@@ -209,7 +333,6 @@ const NavBar = () => {
           aria-hidden="true"
         />
         
-        {/* Sliding menu panel */}
         <div 
           className={`absolute left-0 top-0 h-full w-3/4 max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? 'translate-x-0' : '-translate-x-full'
@@ -219,7 +342,6 @@ const NavBar = () => {
           aria-label="Mobile menu"
         >
           <div className='py-8 px-6 h-full flex flex-col'>
-            {/* Menu header */}
             <div className='flex justify-between items-center mb-8'>
               <h2 className='text-2xl font-bold'>Menu</h2>
               <button 
@@ -231,7 +353,6 @@ const NavBar = () => {
               </button>
             </div>
             
-            {/* Mobile navigation links */}
             <nav aria-label="Mobile navigation">
               <ul className='flex flex-col gap-2 text-xl'>
                 {navigationItems.map((item) => (
@@ -245,6 +366,15 @@ const NavBar = () => {
                     {item.label}
                   </li>
                 ))}
+                
+                <li 
+                  onClick={handleAboutClick} 
+                  className='cursor-pointer hover:bg-gray-50 hover:text-primary transition-all duration-200 py-3 px-4 rounded-lg'
+                  role="button"
+                  tabIndex={0}
+                >
+                  About
+                </li>
               </ul>
             </nav>
           </div>

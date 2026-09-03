@@ -13,10 +13,10 @@ const Paginate = ({ itemsPerPage = 6, items: providedItems }) => {
     function Items({ currentItems }) {
         return (
             <>
-                <div className='grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-6 lg:gap-7.5'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7.5'>
                     {currentItems &&
                         currentItems.map((item) => (
-                            <div>
+                            <div key={item.id}>
                                 <Card
                                     id={item.id}
                                     productDetails={item}
@@ -37,22 +37,13 @@ const Paginate = ({ itemsPerPage = 6, items: providedItems }) => {
 
     const [itemOffset, setItemOffset] = useState(0);
 
-    // Simulate fetching items from another resources.
-    // (This could be items from props; or items loaded in a local state
-    // from an API endpoint with useEffect and useState)
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     const currentItems = items.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(items.length / itemsPerPage);
 
-    // Invoke when user click to request another page.
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % items.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`
-        );
         setItemOffset(newOffset);
-
     };
 
     return (
